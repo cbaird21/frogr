@@ -4,7 +4,7 @@ header {
     height: 20vh;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image:url(client/src/images/frogbanner.png);
+    background-image:url(/client/src/images/frogbanner.png);
 
 }
 
