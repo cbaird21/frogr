@@ -1,0 +1,67 @@
+* { box-sizing: border-box; }
+
+header {
+    height: 20vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image:url(/assets/images/frogbanner.png);
+
+}
+
+.brand {
+    color: white;
+}
+
+.grid {
+  background: #EEE;
+  max-width: 1200px;
+}
+
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-sizer,
+.grid-item {
+  width: 20%;
+}
+
+.grid-item {
+  height: 120px;
+  float: left;
+  background: #D26;
+  border: 2px solid #333;
+  border-color: hsla(0, 0%, 0%, 0.5);
+  border-radius: 5px;
+}
+
+.grid-item--width2 { width:  40%; }
+.grid-item--width3 { width:  60%; }
+
+.grid-item--height2 { height: 200px; }
+.grid-item--height3 { height: 260px; }
+.grid-item--height4 { height: 360px; }
+
+.grid-item--gigante {
+  width: 320px;
+  height: 360px;
+  z-index: 2; /* above other items */
+}
+
+.grid-item:hover {
+  background: rgb(123, 252, 129);
+  border-color: white;
+  cursor: pointer;
+}
+
+/* .sticky {
+  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+} */
