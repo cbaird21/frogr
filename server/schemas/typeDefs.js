@@ -6,11 +6,12 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
     posts: [Post]!
+    thoughts: [Thought]!
   }
 
   type Post {
+    _id: ID
     postImage: String
     postText: String
     postAuthor: String
@@ -35,9 +36,10 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: [User]
+    users: [User]
     user(username: String!): User
-    post(username: String): [Post]
+    posts(username: String): [Post]
+    post(post: ID!): Post
     thoughts(username: String): [Thought]
     thought(thought: ID!): Thought
     me: User
@@ -48,7 +50,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addPost(postImage: String!, postText: String): Post
     addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
+    addPostComment(postId: ID!, commentText: String!): Post
+    addThoughtComment(thoughtId: ID!, commentText: String!): Thought
     removePost(postId: ID!): Post
     removeThought(thoughtId: ID!): Thought
     removePostComment(postId: ID!, commentId: ID!): Post
