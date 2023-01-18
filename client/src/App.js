@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import Discover from './pages/Discover';
-import SavedPosts from './pages/SavedPost';
+import SearchPosts from './pages/SearchPost';
 import LikedPost from './pages/LikedPost';
-import Navbar from './components/Navbar';
-
+import NavBar from './components/NavBar.js';
+import Footer from './components/Footer/index';
 //Create an Apollo Provider to make every request work with the Apollo server.
 // const client = new ApolloClient({
 //   uri: '/graphql',
@@ -41,13 +41,14 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <>
-                    <Navbar />
+                    <NavBar />
                     <Routes>
-                        <Route exact path='/' component={SavedPosts} />
+                        <Route exact path='/' component={SearchPosts} />
                         <Route exact path='/saved' component={LikedPost} />
                         <Route exact path='/discover' component={Discover} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
                     </Routes>
+                    <Footer />
                 </>
             </Router>
         </ApolloProvider>

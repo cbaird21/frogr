@@ -42,11 +42,11 @@ const LikedPost = () => {
 
     return (
         <>
-            <Jumbotron fluid className="text-light bg-dark">
+            <div fluid className="text-light bg-dark">
                 <Container>
                     <h1>Viewing saved posts!</h1>
                 </Container>
-            </Jumbotron>
+            </div>
             <Container>
                 <h2>
                     {userData.LikedPost.length
@@ -54,7 +54,7 @@ const LikedPost = () => {
                         }:`
                         : "You have no liked posts!"}
                 </h2>
-                <CardColumns>
+                <div class="grid">
                     {userData.LikedPost.map((post) => {
                         return (
                             <Card key={post.postId} border="dark">
@@ -79,7 +79,7 @@ const LikedPost = () => {
                             </Card>
                         );
                     })}
-                </CardColumns>
+                </div>
             </Container>
         </>
     );
