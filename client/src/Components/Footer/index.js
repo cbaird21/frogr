@@ -15,42 +15,42 @@ const Footer = () => {
                         &larr; Go Back
                     </button>
                 )}
-                <ul class="nav justify-content-center">
-        <li class="nav-item">
+                <ul className="nav justify-content-center">
+        <li className="nav-item">
             <a
-                class="nav-link active"
+                className="nav-link active"
                 aria-current="page"
                 href="https://github.com/jennnmarshall"
                 target="blank"
-            ><i class="fa-brands fa-github"></i>Jenn</a>
+            ><i className="fa-brands fa-github"></i>Jenn</a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
             <a
-                class="nav-link"
+                className="nav-link"
                 href="https://github.com/cbaird21"
                 target="blank"
-            ><i class="fa-brands fa-github"></i>Chandler</a>
+            ><i className="fa-brands fa-github"></i>Chandler</a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
             <a
-                class="nav-link"
+                className="nav-link"
                 href="https://github.com/mgetz34"
                 target="blank"
-            ><i class="fa-brands fa-github"></i>Michael</a>
+            ><i className="fa-brands fa-github"></i>Michael</a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
             <a
-                class="nav-link"
+                className="nav-link"
                 href="https://github.com/GarrettA01"
                 target="blank"
-            ><i class="fa-brands fa-github"></i>Garrett</a>
+            ><i className="fa-brands fa-github"></i>Garrett</a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
             <a
-                class="nav-link"
+                className="nav-link"
                 href="https://github.com/GarrettA01"
                 target="blank"
-            ><i class="fa-brands fa-github"></i>Andy</a>
+            ><i className="fa-brands fa-github"></i>Andy</a>
             </li>        
         </ul>
             </div>
