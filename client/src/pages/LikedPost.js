@@ -52,7 +52,7 @@ const LikedPost = () => {
                     {userData.LikedPost.length
                         ? `Viewing ${userData.LikedPost.length} saved ${userData.LikedPost.length === 1 ? "post" : "posts"
                         }:`
-                        : "You have no saved posts!"}
+                        : "You have no liked posts!"}
                 </h2>
                 <CardColumns>
                     {userData.LikedPost.map((post) => {

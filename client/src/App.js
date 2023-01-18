@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
-import Discover from './pages/Discover.js';
+import Discover from './pages/Discover';
+import SavedPosts from './pages/SavedPost';
 import LikedPost from './pages/LikedPost';
 import Navbar from './components/Navbar';
 
@@ -41,11 +42,12 @@ function App() {
             <Router>
                 <>
                     <Navbar />
-                    <Switch>
-                        <Route exact path='/' component={Discover} />
+                    <Routes>
+                        <Route exact path='/' component={SavedPosts} />
                         <Route exact path='/saved' component={LikedPost} />
+                        <Route exact path='/discover' component={Discover} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-                    </Switch>
+                    </Routes>
                 </>
             </Router>
         </ApolloProvider>
