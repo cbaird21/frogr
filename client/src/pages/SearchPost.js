@@ -14,7 +14,7 @@ import Auth from "../utils/auth";
 // import { searchGoogleBooks } from '../utils/API';
 import { savePostIds, getSavedPostIds } from "../utils/localStorage";
 
-const SavedPosts = () => {
+const SearchPosts = () => {
     // create state for holding returned cloudinary api data
     const [searchedPost, setsearchedPost] = useState([]);
     // create state for holding our search field data
@@ -27,7 +27,7 @@ const SavedPosts = () => {
     // set up useEffect hook to save `savedPostIds` list to localStorage on component unmount
     // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
     useEffect(() => {
-        return () => savePostId(savedPostIds);
+        return () => savePostIds(savedPostIds);
     });
 
     // create method to search for books and set state on form submit
@@ -97,7 +97,7 @@ const SavedPosts = () => {
 
     return (
         <>
-            <Jumbotron fluid className="text-light bg-dark">
+            <div fluid className="text-light bg-dark">
                 <Container>
                     <h1>Discover different ideas!</h1>
                     <Form onSubmit={handleFormSubmit}>
@@ -120,7 +120,7 @@ const SavedPosts = () => {
                         </Form.Row>
                     </Form>
                 </Container>
-            </Jumbotron>
+            </div>
 
             <Container>
                 <h2>
@@ -128,7 +128,7 @@ const SavedPosts = () => {
                         ? `Viewing ${searchedPost.length} results:`
                         : "Search for a book to begin"}
                 </h2>
-                <CardColumns>
+                <div class="grid">
                     {searchedPost.map((post) => {
                         return (
                             <Card key={post.postId} border="dark">
@@ -162,10 +162,10 @@ const SavedPosts = () => {
                             </Card>
                         );
                     })}
-                </CardColumns>
+                </div>
             </Container>
         </>
     );
 };
 
-export default SavedPosts;
+export default SearchPosts;

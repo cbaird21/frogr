@@ -15,18 +15,44 @@ const Footer = () => {
                         &larr; Go Back
                     </button>
                 )}
-                <h4>
-                    Made with{' '}
-                    <span
-                        className="emoji"
-                        role="img"
-                        aria-label="heart"
-                        aria-hidden="false"
-                    >
-                        ❤️
-                    </span>{' '}
-                    by the Tech Thoughts team.
-                </h4>
+                <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a
+                class="nav-link active"
+                aria-current="page"
+                href="https://github.com/jennnmarshall"
+                target="_blank"
+            ><i class="fa-brands fa-github"></i>Jenn</a>
+            </li>
+            <li class="nav-item">
+            <a
+                class="nav-link"
+                href="https://github.com/cbaird21"
+                target="_blank"
+            ><i class="fa-brands fa-github"></i>Chandler</a>
+            </li>
+            <li class="nav-item">
+            <a
+                class="nav-link"
+                href="https://github.com/mgetz34"
+                target="_blank"
+            ><i class="fa-brands fa-github"></i>Michael</a>
+            </li>
+            <li class="nav-item">
+            <a
+                class="nav-link"
+                href="https://github.com/GarrettA01"
+                target="_blank"
+            ><i class="fa-brands fa-github"></i>Garrett</a>
+            </li>
+            <li class="nav-item">
+            <a
+                class="nav-link"
+                href="https://github.com/GarrettA01"
+                target="_blank"
+            ><i class="fa-brands fa-github"></i>Andy</a>
+            </li>        
+        </ul>
             </div>
         </footer>
     );
