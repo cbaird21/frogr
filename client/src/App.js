@@ -3,15 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import Discover from './pages/Discover';
-import SearchPosts from './pages/SearchPost';
+// import SearchPosts from './pages/SearchPost';
 import LikedPost from './pages/LikedPost';
 import NavBar from './components/NavBar.js';
 import Footer from './components/Footer/index';
-//Create an Apollo Provider to make every request work with the Apollo server.
-// const client = new ApolloClient({
-//   uri: '/graphql',
-//   cache: new InMemoryCache(),
-// });
+import Header from './components/Header/index';
 
 // this sends graphql operations to our remote endpoint, it might be what we were missing?
 const httpLink = createHttpLink({
@@ -37,15 +33,17 @@ const client = new ApolloClient({
 });
 
 function App() {
+
     return (
         <ApolloProvider client={client}>
             <Router>
                 <>
-                    <NavBar />
+                    <Header>
+                        <NavBar />
+                    </Header>
                     <Routes>
-                        <Route exact path='/' component={SearchPosts} />
-                        <Route exact path='/saved' component={LikedPost} />
-                        <Route exact path='/discover' component={Discover} />
+                        <Route exact path='/' element={<Discover/>} />
+                        <Route exact path='/saved' element={<LikedPost/>} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
                     </Routes>
                     <Footer />
