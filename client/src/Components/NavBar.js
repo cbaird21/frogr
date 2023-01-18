@@ -17,7 +17,7 @@ const AppNavbar = () => {
         <>
             <Navbar bg='secondary' variant='dark' expand='lg' fixed="top" shadow="lg">
                 <Container fluid>
-                    <FontAwesomeIcon icon={icon({name: 'frog', style: 'solid'})} />
+                    <FontAwesomeIcon icon={icon({name: 'frog', style: 'solid'})}/>
                     <Navbar.Brand as={Link} to='/'>
                         frogr
                     </Navbar.Brand>

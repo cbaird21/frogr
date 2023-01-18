@@ -7,6 +7,7 @@ import {Cloudinary} from "@cloudinary/url-gen";
 // Import any actions required for transformations.
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { Container, Card } from 'react-bootstrap';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 const Discover = () => {
   // 2. Set your cloud name
@@ -20,7 +21,7 @@ const Discover = () => {
     // 3. Get your image
     //===================
     // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-    const myImage = cld.image('images/frog1'); 
+    const myImage = cld.image('images'); 
     // 4. Transform your image
     //=========================
     // Resize to 250 x 250 pixels using the 'fill' crop mode.
@@ -29,12 +30,21 @@ const Discover = () => {
     // =========================
     // Render the image in a React component.
     return (
-        <Container>
+        <Container fluid>
             <h1>This is the discover page</h1>
-            <Card>
+            <Card className='m-3' style={{ width: '18rem' }}>
+                <CardHeader>
+                    <img alt="profile pic"></img><h3>Username</h3>
+                </CardHeader>
                 <Card Body>
                     <AdvancedImage cldImg={myImage} />
                 </Card>
+                <Card.Text>
+                    post description
+                </Card.Text>
+                <Card.Footer>
+                    <small className="text-muted">createdAt</small>
+                </Card.Footer>
             </Card>
         </Container>
     )
