@@ -173,22 +173,24 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
-  },
-  removeThoughtComment: async (parent, { thoughtId, commentId }, context) => {
-    if (context.user) {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        {
-          $pull: {
-            comments: {
-              _id: commentId,
-              commentAuthor: context.user.username,
+    removeThoughtComment: async (parent, { thoughtId, commentId }, context) => {
+      if (context.user) {
+        return Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          {
+            $pull: {
+              comments: {
+                _id: commentId,
+                commentAuthor: context.user.username,
+              },
             },
           },
-        },
-        { new: true }
-      );
-    }
-    throw new AuthenticationError("You need to be logged in!");
+          { new: true }
+        );
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 };
+
+module.exports = resolvers;
