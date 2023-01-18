@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
-    Jumbotron,
+    
     Container,
     Col,
     Form,
     Button,
     Card,
-    CardColumns,
+    
 } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { LIKED_POST } from "../utils/mutations";
@@ -41,9 +41,9 @@ const SearchPosts = () => {
         try {
             const cloudAPI = await fetch('https://api.cloudinary.com/v1_1/drxesxzoi');
             // removes the need for the api util
-            const response = await fetch(
-                `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
-            );
+            // const response = await fetch(
+            //     `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+            // );
 
             if (!cloudAPI.ok) {
                 throw new Error("something went wrong!");

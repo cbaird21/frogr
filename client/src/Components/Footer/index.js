@@ -21,35 +21,35 @@ const Footer = () => {
                 class="nav-link active"
                 aria-current="page"
                 href="https://github.com/jennnmarshall"
-                target="_blank"
+                target="blank"
             ><i class="fa-brands fa-github"></i>Jenn</a>
             </li>
             <li class="nav-item">
             <a
                 class="nav-link"
                 href="https://github.com/cbaird21"
-                target="_blank"
+                target="blank"
             ><i class="fa-brands fa-github"></i>Chandler</a>
             </li>
             <li class="nav-item">
             <a
                 class="nav-link"
                 href="https://github.com/mgetz34"
-                target="_blank"
+                target="blank"
             ><i class="fa-brands fa-github"></i>Michael</a>
             </li>
             <li class="nav-item">
             <a
                 class="nav-link"
                 href="https://github.com/GarrettA01"
-                target="_blank"
+                target="blank"
             ><i class="fa-brands fa-github"></i>Garrett</a>
             </li>
             <li class="nav-item">
             <a
                 class="nav-link"
                 href="https://github.com/GarrettA01"
-                target="_blank"
+                target="blank"
             ><i class="fa-brands fa-github"></i>Andy</a>
             </li>        
         </ul>
