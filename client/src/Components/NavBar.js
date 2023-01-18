@@ -6,15 +6,18 @@ import LoginForm from './LoginForm';
 
 import Auth from '../utils/auth';
 
+ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  import { faFrog } from '@fortawesome/free-solid-svg-icons'
+
 const AppNavbar = () => {
     // set modal display state
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
-            <Navbar bg='dark' variant='dark' expand='lg' fixed="top" shadow="lg">
+            <Navbar bg='secondary' variant='dark' expand='lg' fixed="top" shadow="lg">
                 <Container fluid>
-                    <i class="fa-solid fa-frog brand m-0"></i>
+                    <FontAwesomeIcon icon={["fas", "coffee"]} />
                     <Navbar.Brand as={Link} to='/'>
                         frogr
                     </Navbar.Brand>
