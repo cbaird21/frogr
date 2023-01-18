@@ -54,7 +54,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `postCount` with the number of saved posts we have
+// when we query a user, we'll also get another field called `postCount` with the number of saved-liked posts we have
 userSchema.virtual('postCount').get(function () {
     return this.likedPost.length;
 });
