@@ -2,7 +2,6 @@
 // 1. Import classes
 // ==================
 import React from 'react'
-import {Image, Video, Transformation} from 'cloudinary-react';
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 import {scale} from "@cloudinary/url-gen/actions/resize";
@@ -10,7 +9,7 @@ import {scale} from "@cloudinary/url-gen/actions/resize";
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { Container, Card } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
-require(dotenv).config();
+
 
 const Discover = () => {
     // 2. Set your cloud name
@@ -44,9 +43,7 @@ const Discover = () => {
                     <img alt="profile pic"></img><h3>Username</h3>
                 </CardHeader>
                 <Card.Body>
-                    <Image cloudName="drxesxzoi" publicId="sample">
-                        <Transformation crop="scale" width="200" angle="10"/>
-                    </Image>
+                    <AdvancedImage cldImg={myImage} />
                     <Card.Text>
                         post description
                     </Card.Text>

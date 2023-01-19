@@ -47,6 +47,7 @@ function App() {
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
                         <Route exact path='/saved' element={<LikedPost />} />
+                        <Route exact path="/profile" element={< Profile />} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
                     </Routes>
                     <Footer />

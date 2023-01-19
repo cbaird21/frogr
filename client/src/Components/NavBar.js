@@ -7,7 +7,7 @@ import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+import { icon } from '@fortawesome/fontawesome-svg-core' // <-- import styles to be used
 
 const AppNavbar = () => {
     // set modal display state

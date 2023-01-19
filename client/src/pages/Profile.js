@@ -1,28 +1,25 @@
 import React from 'react'
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
-import {Transformation} from "@cloudinary/url-gen";
+
 
 // Import required actions.
-import {thumbnail, scale} from "@cloudinary/url-gen/actions/resize";
+import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-import {sepia} from "@cloudinary/url-gen/actions/effect";
-import {source} from "@cloudinary/url-gen/actions/overlay";
-import {opacity,brightness} from "@cloudinary/url-gen/actions/adjust";
-import {byAngle} from "@cloudinary/url-gen/actions/rotate"
+
 
 // Import required qualifiers.
-import {image} from "@cloudinary/url-gen/qualifiers/source";
-import {Position} from "@cloudinary/url-gen/qualifiers/position";
-import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
+
 import {focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
 import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 
 //import React/bootstrap
 import { Card, Container} from 'react-bootstrap';
 
-const posts = []; // array of this users posts with images from cloudinary 
+const myPosts = []; // array of this users posts with images from cloudinary 
+
 const me = "" // logged in user
+
 const Profile = () => {
     
   // Create and configure your Cloudinary instance.
@@ -47,39 +44,47 @@ const Profile = () => {
         <> 
         { 
             loggedIn ? (
-                <aside className="profile-container ms-auto">
-                    <div>
-                        <h2 className="">{`${me.username}}`}</h2>
-                        <AdvancedImage cldImg={profilePic} />
-                    </div>
-                </aside>
+                        <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
+                            <main className="col-9 border h-100 d-inline-block rounded overflow-hidden">
+                                <div id="postContainer d-flex">
+                                    {
+                                        myPosts.map((post) => {
+                                            <Card className='m-3' style={{ width: '18rem' }}>
+                                                <Card.Header>
+                                                    <img alt="profile pic"></img><h3>Username</h3>
+                                                </Card.Header>
+                                                <Card.Body>
+                                                    <AdvancedImage cldImg={post.postImage} />
+                                                    <Card.Text>
+                                                        post description
+                                                    </Card.Text>
+                                                </Card.Body>
+                                                <Card.Footer>
+                                                    <small className="text-muted">createdAt</small>
+                                                </Card.Footer>
+                                            </Card>
+                                        })
+                                    }
+                                </div>
+                            </main>
+                            <aside className="col-3">    
+                                <Card bg="secondary" className="w-100 h-100  d-inline-block">
+                                    <Card.Header className="p-4 m-0  border-bottom">
+                                        <AdvancedImage className="p-2" cldImg={profilePic} />
+                                        <h2 className="p-2 d-inline">{`${me.username}}`}</h2>
+                                        <p className="p-2">{`${myPosts.length}`} Posts </p>
+                                    </Card.Header>
+                                </Card>
+                            </aside>
+                        </Container>
             ) : (
                 <div>
-                    <alert>You must be logged in first!</alert>
+                    <alert color="danger">You must be logged in first!</alert>
                 </div>
             )
         }
             
-            <div calssName="post-container">
-                <Container>
-                    { 
-                        posts.map((post) =>(
-                            <Card>
-                                <Card.Header>
-                                    <img>{`${post.author.profilePic}`}</img>
-                                    <h5>{`${post.author}`}</h5>
-                                </Card.Header>
-                                <Card.Body>
-                                    <img>post image here</img>
-                                    <Card.Text>
-                                        this is the post meat
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        ))
-                    }
-                </Container>
-            </div>
+            
         </>
         
 
