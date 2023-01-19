@@ -46,3 +46,13 @@ test('INPUT WHAT YOU WANT TO HAPPEN', () => {
 
 // command npm  run test, 
 //  it runs in watch mode
+
+// global test method has 2 args
+// string description
+// test function
+// test fails if any error is thrown when running the function
+// assertions throw error when expectation fails
+// no error- test pass
+// empty test passes!
+// dont intentionally throw errors, assertions will do that.
+
