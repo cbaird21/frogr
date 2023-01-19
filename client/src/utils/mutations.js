@@ -28,60 +28,56 @@ export const LOGIN_USER = gql`
 
 // ADD_POST will execute the addPost mutation.
 export const ADD_POST = gql`
-  mutation addPost($postImage: String!, $postText: String) {
-    addPost(postImage: $postImage, postText: $postText ) {
-      _id
-      username
-      addPost {
-        postImage
-        postText
-        postAuthor
-      }
+  mutation addPost($postImage: String, $postText: String) {
+    addPost(postImage: $postImage, postText: $postText) {
+      postImage
+      postText
+      postAuthor
     }
   }
 `;
 
 // ADD_THOUGHT will execute the addThought mutation.
 export const ADD_THOUGHT = gql`
-  mutation addThought( $thoughtText: String!) {
+  mutation addThought($thoughtText: String!) {
     addThought(thoughtText: $thoughtText) {
       _id
-      username 
+      username
       addThought {
         thoughtText
         thoughtAuthor
       }
     }
   }
-  `
+`;
 
 // ADD_POST_COMMENT will execute the addThought mutation
 export const ADD_POST_COMMENT = gql`
-  mutation addPostComment($postId: ID!, $commentText: String!){
-    addPostComment( _id: $postId, commentText: $commentText) {
+  mutation addPostComment($postId: ID!, $commentText: String!) {
+    addPostComment(_id: $postId, commentText: $commentText) {
       _id
-      username 
+      username
       addPostComment {
         commentText
         commentAuthor
       }
     }
   }
-  `
+`;
 
 // ADD_THOUGHT_COMMENT will execute the addThought mutation
 export const ADD_THOUGHT_COMMENT = gql`
-  mutation addThoughtComment($thoughtId: ID!, $commentText: String!){
-    addThoughtComment( _id: $thoughtId, commentText: $commentText) {
+  mutation addThoughtComment($thoughtId: ID!, $commentText: String!) {
+    addThoughtComment(_id: $thoughtId, commentText: $commentText) {
       _id
-      username 
+      username
       addThoughtComment {
         commentText
         commentAuthor
       }
     }
   }
-  `
+`;
 
 // REMOVE_POST will execute the removePost mutation.
 export const REMOVE_POST = gql`
@@ -90,9 +86,9 @@ export const REMOVE_POST = gql`
       _id
       username
       removePost {
-      postImage
-      postText
-      postAuthor
+        postImage
+        postText
+        postAuthor
       }
     }
   }
@@ -115,28 +111,28 @@ export const REMOVE_THOUGHT = gql`
 // REMOVE_POST_COMMENT will execute the removePostComment mutation
 export const REMOVE_POST_COMMENT = gql`
   mutation removePostComment($postId: ID!, $commentId: ID!) {
-    removePostComment(_id: $postId, _id: $commentId){
+    removePostComment(_id: $postId, _id: $commentId) {
       _id
-      removePostComment{
+      removePostComment {
         commentText
         commentAuthor
       }
     }
   }
-`
+`;
 
 // REMOVE_THOUGHT_COMMENT will execute the removeThoughtComment mutation
 export const REMOVE_THOUGHT_COMMENT = gql`
   mutation removeThoughtComment($thoughtId: ID!, $commentId: ID!) {
-    removeThoughtComment(_id: $thoughtId, _id: $commentId){
+    removeThoughtComment(_id: $thoughtId, _id: $commentId) {
       _id
-      removeThoughtComment{
+      removeThoughtComment {
         commentText
         commentAuthor
       }
     }
   }
-`
+`;
 
 // LIKED_POST will execute the likePost mutation.
 export const LIKED_POST = gql`
@@ -154,7 +150,7 @@ export const LIKED_POST = gql`
       }
     }
   }
-`
+`;
 export const ADD_PROFILE = gql`
   mutation addProfile($name: String!) {
     addProfile(name: $name) {
