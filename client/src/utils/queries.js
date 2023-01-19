@@ -35,5 +35,14 @@ export const GET_POST = gql`
 `
 
 export const GET_SINGLE_POST = gql`
-
+  query getSinglePost($postId: ID!){
+    post(postID: $postId){
+      _id
+      authors
+      description
+      title
+      image
+      link
+    }
+  }
 `

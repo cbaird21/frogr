@@ -10,6 +10,7 @@ import {scale} from "@cloudinary/url-gen/actions/resize";
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { Container, Card } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
+require(dotenv).config();
 
 const Discover = () => {
     // 2. Set your cloud name
@@ -17,15 +18,17 @@ const Discover = () => {
     // Create a Cloudinary instance and set your cloud name.
     const cld = new Cloudinary({
         cloud: {
-            cloudName: 'drxesxzoi',
-            apiKey: '763181614518887',
-            apiSecret: 'xi6pE1Fv2B405Eow0d_EadJ4ykI'
+            cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+            apiKey: process.env.CLOUDINARY_API_KEY,
+            apiSecret: process.env.CLOUDINARY_API_SECRETs,
+            encrypted: true,
         }
     });
     // // 3. Get your image
     // //===================
     // // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-    const myImage = cld.v2.search.expression() 
+    console.log(cld)
+    const myImage = cld.image(`sample`)
     // // 4. Transform your image
     // //=========================
     // // Resize to 250 x 250 pixels using the 'fill' crop mode.
@@ -34,7 +37,6 @@ const Discover = () => {
     // =========================
     // Render the image in a React component.
     return (
-        
         <Container fluid>
             <h1>This is the discover page</h1>
             <Card className='m-3' style={{ width: '18rem' }}>

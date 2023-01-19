@@ -18,8 +18,13 @@ import {compass} from "@cloudinary/url-gen/qualifiers/gravity";
 import {focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
 import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 
-const App = () => {
+//import React/bootstrap
+import { Card, Container} from 'react-bootstrap';
 
+const posts = []; // array of this users posts with images from cloudinary 
+const me = "" // logged in user
+const Profile = () => {
+    
   // Create and configure your Cloudinary instance.
     const cld = new Cloudinary({
         cloud: {
@@ -33,24 +38,52 @@ const App = () => {
     // Apply the transformation.
     profilePic
     .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
-    .roundCorners(byRadius(100))    // Round the corners.
-    .overlay(   // Overlay the Cloudinary logo.
-        source(
-        image('cloudinary_icon_blue')
-            .transformation(new Transformation()
-            .resize(scale(50)) // Resize the logo.
-            .adjust(opacity(60))  // Adjust the opacity of the logo.
-            .adjust(brightness(200)))  // Adjust the brightness of the logo.       
-        )
-        .position(new Position().gravity(compass('south_east')).offsetX(5).offsetY(5))   // Position the logo.
-    )
-    .rotate(byAngle(10))  // Rotate the result.
+    .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
     .format('png');   // Deliver as PNG. */
-
+    
+    const loggedIn = true
     // Render the transformed image in a React component.
     return (
-        <div>
-        <AdvancedImage cldImg={myImage} />
-        </div>
+        <> 
+        { 
+            loggedIn ? (
+                <aside className="profile-container ms-auto">
+                    <div>
+                        <h2 className="">{`${me.username}}`}</h2>
+                        <AdvancedImage cldImg={profilePic} />
+                    </div>
+                </aside>
+            ) : (
+                <div>
+                    <alert>You must be logged in first!</alert>
+                </div>
+            )
+        }
+            
+            <div calssName="post-container">
+                <Container>
+                    { 
+                        posts.map((post) =>(
+                            <Card>
+                                <Card.Header>
+                                    <img>{`${post.author.profilePic}`}</img>
+                                    <h5>{`${post.author}`}</h5>
+                                </Card.Header>
+                                <Card.Body>
+                                    <img>post image here</img>
+                                    <Card.Text>
+                                        this is the post meat
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        ))
+                    }
+                </Container>
+            </div>
+        </>
+        
+
     )
 };
+
+export default Profile;

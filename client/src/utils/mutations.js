@@ -9,14 +9,6 @@ export const ADD_USER = gql`
         _id
         username
         email
-        likedPost {
-          authors
-          postId
-          image
-          link
-          title
-          description
-        }
       }
     }
   }
@@ -41,9 +33,9 @@ export const ADD_POST = gql`
       _id
       username
       addPost {
-      postImage
-      postText
-      postAuthor
+        postImage
+        postText
+        postAuthor
       }
     }
   }
