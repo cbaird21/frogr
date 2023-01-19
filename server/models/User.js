@@ -1,9 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const postSchema = require('./Post');
-
-
 const userSchema = new Schema(
   {
     username: {
@@ -23,8 +20,13 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    likedPost: [postSchema],
     // thoughts references the thoughtsSchema for all of a users' thoughts
+    likedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
     posts: [
       {
         type: Schema.Types.ObjectId,
