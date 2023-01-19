@@ -24,13 +24,6 @@ const typeDefs = gql`
     createdAt: String
   }
 
-  type Thought {
-    _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    comments: [Comment]!
-    createdAt: String
-  }
   type Comment {
     _id: ID
     commentText: String
@@ -49,8 +42,6 @@ const typeDefs = gql`
     user(username: String!): User
     posts(username: String): [Post]
     post(postId: ID!): Post
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
     me: User
   }
 
@@ -62,12 +53,8 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addPost(postImage: String!, postText: String): Post
     removePost(postId: ID!): Post
-    addPostComment(postId: ID!, commentText: String!): Post
-    removePostComment(postId: ID!, commentId: ID!): Post
-    addThought(thoughtText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    addThoughtComment(thoughtId: ID!, commentText: String!): Thought
-    removeThoughtComment(thoughtId: ID!, commentId: ID!): Thought
+    addComment(postId: ID!, commentText: String!): Post
+    removeComment(postId: ID!, commentId: ID!): Post
   }
 `;
 
