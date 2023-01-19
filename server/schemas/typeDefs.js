@@ -4,7 +4,6 @@ const typeDefs = gql`
 type Profile {
     _id: ID
     name: String
-    skills: [String]!
   }
 
   type User {

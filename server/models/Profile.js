@@ -6,13 +6,7 @@ const profileSchema = new Schema({
         required: true,
         unique: true,
         trim: true,
-    },
-    skills: [
-        {
-            type: String,
-            trim: true,
-        },
-    ],
+    }
 });
 
 const Profile = model('Profile', profileSchema);
