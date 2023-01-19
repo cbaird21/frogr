@@ -20,6 +20,7 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
+    likedPost: [postSchema],
     // thoughts references the thoughtsSchema for all of a users' thoughts
     thoughts: [
       {
