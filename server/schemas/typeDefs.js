@@ -12,7 +12,6 @@ const typeDefs = gql`
     email: String
     password: String
     posts: [Post]!
-    thoughts: [Thought]!
   }
 
   type Post {
@@ -38,6 +37,7 @@ const typeDefs = gql`
 
   type Query {
     profile(profileId: ID!): Profile
+    profiles: [Profile]
     users: [User]
     user(username: String!): User
     posts(username: String): [Post]
