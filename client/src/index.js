@@ -13,4 +13,3 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// CLOUDINARY_URL=cloudinary://763181614518887:xi6pE1Fv2B405Eow0d_EadJ4ykI@drxesxzoi
