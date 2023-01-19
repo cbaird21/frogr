@@ -5,9 +5,10 @@ import { setContext } from "@apollo/client/link/context";
 import Discover from './pages/Discover';
 // import SearchPosts from './pages/SearchPost';
 import LikedPost from './pages/LikedPost';
-import NavBar from './components/NavBar.js';
-import Footer from './components/Footer/index';
-import Header from './components/Header/index';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import UploadWidget from './components/UploadWidget';
 
 // this sends graphql operations to our remote endpoint, it might be what we were missing?
 const httpLink = createHttpLink({
@@ -41,6 +42,7 @@ function App() {
                     <Header>
                         <NavBar />
                     </Header>
+                    <UploadWidget />
                     <Routes>
                         <Route exact path='/' element={<Discover/>} />
                         <Route exact path='/saved' element={<LikedPost/>} />
