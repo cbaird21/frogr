@@ -21,7 +21,7 @@ const UploadWidget = () => {
         }
         try {
             const {data} = await addPost({
-                variables: {postImage: { imageId }}
+                variables: {postImage: { ...imageId }}
             })
         } catch (err) {
             console.error(err);
