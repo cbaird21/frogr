@@ -21,10 +21,10 @@ const userSchema = new Schema(
       minlength: 5,
     },
     // thoughts references the thoughtsSchema for all of a users' thoughts
-    thoughts: [
+    likedPosts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Thought",
+        ref: "Post",
       },
     ],
     posts: [
