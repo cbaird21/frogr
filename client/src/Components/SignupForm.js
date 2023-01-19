@@ -14,7 +14,7 @@ const SignupForm = () => {
     // set state for alert
     const [showAlert, setShowAlert] = useState(false);
 
-    const [addUser, { error }] = useMutation(ADD_USER);
+    const [addUser, { error, data }] = useMutation(ADD_USER);
 
     useEffect(() => {
         if (error) {
@@ -47,7 +47,7 @@ const SignupForm = () => {
             // same as loginform, login with adduser, grab values from mutation
             Auth.login(data.addUser.token);
         } catch (err) {
-            console.error(err);
+            console.error(JSON.stringify(err));
         }
 
         setUserFormData({
