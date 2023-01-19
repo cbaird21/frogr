@@ -8,6 +8,7 @@ import LikedPost from './pages/LikedPost';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import UploadWidget from './components/UploadWidget';
 
 // this sends graphql operations to our remote endpoint, it might be what we were missing?
 const httpLink = createHttpLink({
@@ -41,6 +42,7 @@ function App() {
                     <Header>
                         <NavBar />
                     </Header>
+                    <UploadWidget />
                     <Routes>
                         <Route exact path='/' element={<Discover/>} />
                         <Route exact path='/saved' element={<LikedPost/>} />
