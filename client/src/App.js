@@ -11,7 +11,7 @@ import Header from './components/Header/index';
 
 // this sends graphql operations to our remote endpoint, it might be what we were missing?
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3000/graphql'
+    uri: '/graphql'
 })
 
 // create link with context to use jwt and pass to apollo
