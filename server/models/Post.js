@@ -5,7 +5,6 @@ const postSchema = new Schema({
   postImage: {
     type: String,
     trim: true,
-    required: true,
   },
   postText: {
     type: String,
