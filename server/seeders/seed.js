@@ -1,31 +1,31 @@
-const db = require('../config/connection');
-const { User, Thought } = require('../models');
-const userSeeds = require('./userSeeds.json');
-const thoughtSeeds = require('./thoughtSeeds.json');
+const db = require("../config/connection");
+const { User, Post } = require("../models");
+const userSeeds = require("./userSeeds.json");
+const thoughtSeeds = require("./thoughtSeeds.json");
 
-db.once('open', async () => {
-    try {
-        await Thought.deleteMany({});
-        await User.deleteMany({});
+db.once("open", async () => {
+  try {
+    await Post.deleteMany({});
+    await User.deleteMany({});
 
-        await User.create(userSeeds);
+    await User.create(userSeeds);
 
-        for (let i = 0; i < thoughtSeeds.length; i++) {
-            const { _id, thoughtAuthor } = await Thought.create(thoughtSeeds[i]);
-            const user = await User.findOneAndUpdate(
-                { username: thoughtAuthor },
-                {
-                    $addToSet: {
-                        thoughts: _id,
-                    },
-                }
-            );
+    for (let i = 0; i < postSeeds.length; i++) {
+      const { _id, postAuthor } = await Post.create(postSeeds[i]);
+      const user = await User.findOneAndUpdate(
+        { username: postAuthor },
+        {
+          $addToSet: {
+            posts: _id,
+          },
         }
-    } catch (err) {
-        console.error(err);
-        process.exit(1);
+      );
     }
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
 
-    console.log('all done!');
-    process.exit(0);
+  console.log("all done!");
+  process.exit(0);
 });
