@@ -1,7 +1,7 @@
 const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-type Profile {
+  type Profile {
     _id: ID
     name: String
   }
@@ -58,14 +58,15 @@ type Profile {
     addProfile(name: String!): Profile
     removeProfile(profileId: ID!): Profile
     addUser(username: String!, email: String!, password: String!): Auth
+    removeUser(userId: ID!): User
     login(email: String!, password: String!): Auth
     addPost(postImage: String!, postText: String): Post
-    addThought(thoughtText: String!): Thought
-    addPostComment(postId: ID!, commentText: String!): Post
-    addThoughtComment(thoughtId: ID!, commentText: String!): Thought
     removePost(postId: ID!): Post
-    removeThought(thoughtId: ID!): Thought
+    addPostComment(postId: ID!, commentText: String!): Post
     removePostComment(postId: ID!, commentId: ID!): Post
+    addThought(thoughtText: String!): Thought
+    removeThought(thoughtId: ID!): Thought
+    addThoughtComment(thoughtId: ID!, commentText: String!): Thought
     removeThoughtComment(thoughtId: ID!, commentId: ID!): Thought
   }
 `;
