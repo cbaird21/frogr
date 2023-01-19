@@ -20,3 +20,20 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const GET_POST = gql`
+  query allPost{
+    post {
+      _id
+      authors
+      description
+      title
+      image
+      link
+    }
+  }
+`
+
+export const GET_SINGLE_POST = gql`
+
+`

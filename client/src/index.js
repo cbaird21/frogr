@@ -5,9 +5,12 @@ import './index.css';
 import App from './App';
 
 
+
 ReactDOM.render(
-    // <React.StrictMode>
-    <App />,
-    // </React.StrictMode>,
+    //<React.StrictMode>
+        <App />,
+    //</React.StrictMode>,
     document.getElementById('root')
 );
+
+// CLOUDINARY_URL=cloudinary://763181614518887:xi6pE1Fv2B405Eow0d_EadJ4ykI@drxesxzoi

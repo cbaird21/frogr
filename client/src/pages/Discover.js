@@ -2,6 +2,7 @@
 // 1. Import classes
 // ==================
 import React from 'react'
+import {Image, Video, Transformation} from 'cloudinary-react';
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 import {scale} from "@cloudinary/url-gen/actions/resize";
@@ -9,7 +10,6 @@ import {scale} from "@cloudinary/url-gen/actions/resize";
 import {fill} from "@cloudinary/url-gen/actions/resize";
 import { Container, Card } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
-require('dotenv').config()
 
 const Discover = () => {
     // 2. Set your cloud name
@@ -18,22 +18,21 @@ const Discover = () => {
     const cld = new Cloudinary({
         cloud: {
             cloudName: 'drxesxzoi',
-
-
+            apiKey: '763181614518887',
+            apiSecret: 'xi6pE1Fv2B405Eow0d_EadJ4ykI'
         }
     });
-    // 3. Get your image
-    //===================
-    // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
-    const myImage = cld.image('images/frog1'); 
-    // 4. Transform your image
-    //=========================
-    // Resize to 250 x 250 pixels using the 'fill' crop mode.
+    // // 3. Get your image
+    // //===================
+    // // Instantiate a CloudinaryImage object for the image with the public ID, 'docs/models'.
+    const myImage = cld.v2.search.expression() 
+    // // 4. Transform your image
+    // //=========================
+    // // Resize to 250 x 250 pixels using the 'fill' crop mode.
     myImage.resize(scale().width(250).height(250)).format('png');
     // 5. Deliver your image
     // =========================
     // Render the image in a React component.
-    
     return (
         
         <Container fluid>
@@ -43,7 +42,9 @@ const Discover = () => {
                     <img alt="profile pic"></img><h3>Username</h3>
                 </CardHeader>
                 <Card.Body>
-                    <AdvancedImage cldImg={myImage} />
+                    <Image cloudName="drxesxzoi" publicId="sample">
+                        <Transformation crop="scale" width="200" angle="10"/>
+                    </Image>
                     <Card.Text>
                         post description
                     </Card.Text>
