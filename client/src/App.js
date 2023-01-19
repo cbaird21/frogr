@@ -44,8 +44,8 @@ function App() {
                     </Header>
                     <UploadWidget />
                     <Routes>
-                        <Route exact path='/' element={<Discover/>} />
-                        <Route exact path='/saved' element={<LikedPost/>} />
+                        <Route exact path='/' element={<Discover />} />
+                        <Route exact path='/saved' element={<LikedPost />} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
                     </Routes>
                     <Footer />
