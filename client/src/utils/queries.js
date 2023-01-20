@@ -27,7 +27,6 @@ export const GET_POST = gql`
     posts {
       _id
       postAuthor
-      authorPic
       postText
       postImage
       createdAt
@@ -41,19 +40,14 @@ export const GET_POST = gql`
 `;
 
 export const GET_SINGLE_POST = gql`
-  query getSinglePost($postAuthor: String!){
-    post(postAuthor: $postAuthor){
+  query getSinglePost($postId: ID!){
+    post(postID: $postId){
       _id
-      postAuthors
-      authorPic
-      postText
-      postImage
-      createdAt
-      comments {
-        commentText
-        commentAuthor
-        createdAt
-      }
+      authors
+      description
+      title
+      image
+      link
     }
   }
 `
