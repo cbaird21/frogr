@@ -10,6 +10,34 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import UploadWidget from './components/UploadWidget';
 
+// import { Component } from 'react';
+// import './App.css';
+
+// import Weavy from './weavy/Weavy';
+// import WeavyApp from './weavy/WeavyApp';
+
+// export default class App extends Component {
+//     async getJwt() {
+//         return '[Provide your JWT here]';
+//     }
+
+//     render() {
+//         return (
+//             <Weavy jwt={this.getJwt}>
+//                 <div className="App">
+//                     <WeavyApp
+//                         spaceKey="react-space"
+//                         spaceName="React Space"
+//                         appKey="react-files"
+//                         appName="React Files"
+//                         appType="files"
+//                     />
+//                 </div>
+//             </Weavy>
+//         );
+//     }
+// }
+
 // this sends graphql operations to our remote endpoint, it might be what we were missing?
 const httpLink = createHttpLink({
     uri: '/graphql'
