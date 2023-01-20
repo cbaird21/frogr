@@ -47,7 +47,6 @@ const Discover = () => {
       </Container>
     </>
   );
-
 };
 
 export default Discover;
