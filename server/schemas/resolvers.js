@@ -1,15 +1,9 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Profile, Post } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    profile: async (parent, { profileId }) => {
-      return Profile.findOne({ _id: profileId });
-    },
-    profiles: async () => {
-      return Profile.find();
-    },
     users: async () => {
       return User.find().populate("posts");
     },
@@ -32,16 +26,24 @@ const resolvers = {
   },
 
   Mutation: {
-    addProfile: async (parent, { name }) => {
-      return Profile.create({ name });
-    },
-    removeProfile: async (parent, { profileId }) => {
-      return Profile.findOneAndDelete({ _id: profileId });
-    },
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { username, email, password, userPic }) => {
+      const user = await User.create({ username, email, password, userPic });
       const token = signToken(user);
       return { token, user };
+    },
+    editUser: async (parent, { username, password, userPic }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {
+            $set: { username: username, password: password, userPic: userPic },
+          },
+          { new: true }
+        );
+        const token = signToken(user);
+        return { token, user };
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
     removeUser: (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId });
