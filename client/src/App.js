@@ -40,9 +40,7 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <>
-                    <Header>
-                        <NavBar />
-                    </Header>
+                    <Header />
                     <UploadWidget />
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
