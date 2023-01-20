@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
 import Discover from './pages/Discover';
+import Profile from './pages/Profile';
 // import SearchPosts from './pages/SearchPost';
 import LikedPost from './pages/LikedPost';
 import NavBar from './components/NavBar';
@@ -46,6 +47,7 @@ function App() {
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
                         <Route exact path='/saved' element={<LikedPost />} />
+                        <Route exact path="/profile" element={< Profile />} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
                     </Routes>
                     <Footer />
