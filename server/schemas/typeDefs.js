@@ -7,8 +7,8 @@ const typeDefs = gql`
     email: String
     password: String
     userPic: String
-    likedPost: [Post]!
-    posts: [Post]!
+    likedPosts: [Post]
+    posts: [Post]
   }
 
   type Post {
@@ -16,8 +16,8 @@ const typeDefs = gql`
     postImage: String
     postText: String
     postAuthor: String
-    comments: [Comment]!
-    likedPost: [User]!
+    comments: [Comment]
+    likedBy: [User]
     createdAt: String
   }
 
@@ -49,6 +49,7 @@ const typeDefs = gql`
       userPic: String
     ): Auth
     editUser(username: String, password: String, userPic: String): Auth
+    likedPost(postId: ID!): Post
     removeUser(userId: ID!): User
     login(email: String!, password: String!): Auth
     addPost(postImage: String, postText: String): Post
