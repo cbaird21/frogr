@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import LikedPost from './pages/LikedPost';
 import Footer from './components/Footer/index';
 import Header from './components/Header/index';
-import UploadWidget from './components/UploadWidget';
+// import UploadWidget from './components/UploadWidget';
 
 // import { Component } from 'react';
 // import './App.css';
@@ -68,7 +68,6 @@ function App() {
             <Router>
                 <>
                     <Header />
-                    <UploadWidget />
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
                         <Route exact path='/saved' element={<LikedPost />} />
