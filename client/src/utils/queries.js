@@ -22,6 +22,7 @@ export const GET_ME = gql`
 `;
 
 export const GET_POST = gql`
+
   query posts{
     posts {
       _id
@@ -36,7 +37,7 @@ export const GET_POST = gql`
       }
     }
   }
-`
+`;
 
 export const GET_SINGLE_POST = gql`
   query getSinglePost($postId: ID!){
