@@ -17,6 +17,7 @@ const Discover = () => {
     const {loading, data} = useQuery(GET_POST);
     const posts = data?.posts || [];
     // Render the image in a React component.
+    // loading
     if (loading) {
     return <div>Loading...</div>;
     }
