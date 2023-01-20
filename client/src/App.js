@@ -43,7 +43,6 @@ function App() {
                     <Header>
                         <NavBar />
                     </Header>
-                    <UploadWidget />
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
                         <Route exact path='/saved' element={<LikedPost />} />

@@ -20,11 +20,13 @@ import { Card, Container} from 'react-bootstrap';
 import Postform from '../components/PostForm'
 import {useQuery} from '@apollo/client'
 import { GET_ME } from '../utils/queries';
+import { useMutation } from '@apollo/client';
 const myPosts = []; // array of this users posts with images from cloudinary 
 
 
 const Profile = () => {
-    const me = useQuery(GET_ME) // logged in user
+    const {loading, data} = useQuery(GET_ME) // logged in user
+    const userData = data?.me || {};
     
   // Create and configure your Cloudinary instance.
     const cld = new Cloudinary({
@@ -76,7 +78,7 @@ const Profile = () => {
                                 <Card bg="secondary" className="w-100 h-100  d-inline-block">
                                     <Card.Header className="p-4 m-0  border-bottom">
                                         <AdvancedImage className="p-2" cldImg={profilePic} />
-                                        <h2 className="p-2 d-inline">{`${me.username}}`}</h2>
+                                        {/* <h2 className="p-2 d-inline">{`${me.username}}`}</h2> */}
                                         <p className="p-2">{`${myPosts.length}`} Posts </p>
                                     </Card.Header>
                                     <Card.Body>

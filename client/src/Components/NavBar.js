@@ -15,7 +15,7 @@ const AppNavbar = () => {
 
     return (
         <>
-            <Navbar bg='secondary' variant='dark' expand='lg' fixed="top" shadow="lg">
+            <Navbar variant='dark' expand='lg' fixed="top" className="shadow">
                 <Container fluid>
                     <FontAwesomeIcon icon={icon({name: 'frog', style: 'solid'})}/>
                     <Navbar.Brand as={Link} to='/'>
