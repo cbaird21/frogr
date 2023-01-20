@@ -8,14 +8,21 @@ export const GET_ME = gql`
     me {
       _id
       username
+      profilePic
       email
+      posts{
+        postId
+        postAuthors
+        postText
+        postImage
+        createdAt
+      }
       likedPost {
         postId
-        authors
-        description
-        title
-        image
-        link
+        postAuthors
+        postText
+        postImage
+        createdAT
       }
     }
   }

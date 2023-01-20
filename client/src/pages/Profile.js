@@ -1,29 +1,21 @@
 import React from 'react'
 import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
-
-
+import {Transformation} from "@cloudinary/url-gen";
 // Import required actions.
 import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-
-
 // Import required qualifiers.
-
 import {focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
 import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
-
 //import React/bootstrap
 import { Card, Container, Button} from 'react-bootstrap';
-
 //import PostForm
 import Postform from '../components/PostForm'
-
 import {useQuery, useMutation} from '@apollo/client';
 import { GET_ME, GET_POST } from '../utils/queries';
 import { REMOVE_POST } from '../utils/mutations';
 import { Token } from 'graphql';
-import { AuthServ } from '../utils/auth';
+import Auth from '../utils/auth';
 
 
 
@@ -35,9 +27,8 @@ const Profile = () => {
     const { load, res } = useQuery(GET_ME);
     const [removePost] = useMutation(REMOVE_POST);
     const userData = res?.me || {};
-
     const handleDeletePost = async (postId) => {
-    const token = AuthServ.loggedIn() ? AuthServ.getToken() : null;
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
         return false;
@@ -54,14 +45,15 @@ const Profile = () => {
         }
     };
     // Apply the transformation.
-    userData.profilePic
-    .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
-    .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
-    .format('png');   // Deliver as PNG. */
+    // userData.profilePic
+    // .transformation(new Transformation)
+    // .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
+    // .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
+    // .format('png');   // Deliver as PNG. */
     if (loading || load) {
         return <div>Loading...</div>;
     }
-    console.log(myPosts, userData )
+    
     return (
         <> 
         { 
