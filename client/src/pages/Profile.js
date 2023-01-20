@@ -49,12 +49,13 @@ const Profile = () => {
         { 
             loggedIn ? (
                         <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
-                            <main className="col-9 border h-100 d-inline-block rounded overflow-hidden">
+                            <main id="postContainer" className="col-9 border h-100 d-inline-block rounded overflow-hidden">
                                 <div id="postContainer d-flex">
                                     <p> this container will display all user's posts</p>
                                     {
                                         myPosts.map((post) => {
-                                            <Card className='m-3' style={{ width: '18rem' }}>
+                                            return(
+                                                <Card className='m-3' style={{ width: '18rem' }}>
                                                 <Card.Header>
                                                     <img alt="profile pic">{post.authorPic}</img><h3>{post.postAuthor}</h3>
                                                 </Card.Header>
@@ -68,6 +69,8 @@ const Profile = () => {
                                                     <small className="text-muted">createdAt {post.createdAt}</small>
                                                 </Card.Footer>
                                             </Card>
+                                            )
+                                            
                                         })
                                     }
                                 </div>
