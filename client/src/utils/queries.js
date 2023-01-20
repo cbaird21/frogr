@@ -12,14 +12,14 @@ export const GET_ME = gql`
       userPic
       likedPost {
         postId
-        postAuthors
+        postAuthor
         postText
         postImage
         createdAT
       }
       posts{
         postId
-        postAuthors
+        postAuthor
         postText
         postImage
         createdAt

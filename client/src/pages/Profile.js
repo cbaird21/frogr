@@ -19,17 +19,15 @@ import Auth from '../utils/auth';
 
 
 const Profile = () => {
-    // logged in user
-
+    
+    // get logged in user data
     const { loading, data } = useQuery(GET_ME);
-    const userData = data?.me || {};
+    const userData = data?.me || [{}];
     const [removePost] = useMutation(REMOVE_POST);
-
     
     const handleDeletePost = async (postId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
     
-
         if (!token) {
             return false;
             }
@@ -44,11 +42,12 @@ const Profile = () => {
             console.error(err);
         }
     };
-    
+
     if (loading) {
         return <div>Loading...</div>;
     }
-    console.log(userData)
+
+    console.log(...userData)
     return (
         <> 
         { 
