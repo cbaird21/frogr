@@ -6,7 +6,6 @@ import Discover from './pages/Discover';
 import Profile from './pages/Profile';
 // import SearchPosts from './pages/SearchPost';
 import LikedPost from './pages/LikedPost';
-import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import UploadWidget from './components/UploadWidget';
@@ -40,9 +39,7 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <>
-                    <Header>
-                        <NavBar />
-                    </Header>
+                    <Header />
                     <UploadWidget />
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
