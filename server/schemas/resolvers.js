@@ -31,7 +31,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    editUser: async (parent, { username, password, userPic }) => {
+    editUser: async (parent, { username, password, userPic }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
@@ -43,6 +43,7 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       }
+      throw new AuthenticationError("You need to be logged in!");
     },
     removeUser: (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId });
