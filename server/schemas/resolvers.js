@@ -5,12 +5,10 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate[({ path: "posts" }, { path: "likedPosts" })];
+      return User.find().populate[{ path: "posts" }, { path: "likedPosts" }];
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate[
-        ({ path: "posts" }, { path: "likedPosts" })
-      ];
+      return User.findOne({ username }).populate[{ path: "posts" }, { path: "likedPosts" }]
     },
     posts: async (parent, { postAuthor }) => {
       const params = postAuthor ? { postAuthor } : {};
@@ -21,10 +19,7 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate([
-          "posts",
-          "likedPosts",
-        ]);
+        return User.findOne({ _id: context.user._id }).populate[{ path: "posts" }, { path: "likedPosts" }]
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -47,20 +42,6 @@ const resolvers = {
         );
         const token = signToken(user);
         return { token, user };
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    likedPost: async (parent, { postId }, context) => {
-      if (context.user) {
-        const post = await Post.findOneAndUpdate(
-          { _id: postId },
-          { $addToSet: { likedBy: context.user._id } }
-        );
-        const user = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { likedPosts: postId } }
-        );
-        return post;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
