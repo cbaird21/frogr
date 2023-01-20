@@ -2,11 +2,11 @@
 // 1. Import classes
 // ==================
 import React from 'react'
-import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
-import {scale} from "@cloudinary/url-gen/actions/resize";
-// Import any actions required for transformations.
-import {fill} from "@cloudinary/url-gen/actions/resize";
+// import {AdvancedImage} from '@cloudinary/react';
+// import {Cloudinary} from "@cloudinary/url-gen";
+// import {scale} from "@cloudinary/url-gen/actions/resize";
+// // Import any actions required for transformations.
+// import {fill} from "@cloudinary/url-gen/actions/resize";
 import { Container, Card } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
@@ -33,10 +33,10 @@ const Discover = () => {
                     <Card className='m-3' style={{ width: '18rem' }}>
                         <CardHeader>
                             
-                            <img src={`"${post.profilePic}"`} alt="profile pic"></img><h3>{post.postAuthor}</h3>
+                            <img src={post.profilePic} alt="profile pic"></img><h3>{post.postAuthor}</h3>
                         </CardHeader>
                         <Card.Body>
-                            <img src={`"${post.postImage}"`} alt="post image"></img>
+                            <img src={post.postImage} alt="post image"></img>
                             <Card.Text>
                                 {post.postText}
                             </Card.Text>
