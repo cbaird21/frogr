@@ -12,56 +12,51 @@ import { Card, Container, Button} from 'react-bootstrap';
 //import PostForm
 import Postform from '../components/PostForm'
 import {useQuery, useMutation} from '@apollo/client';
-import { GET_ME, GET_POST } from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 import { REMOVE_POST } from '../utils/mutations';
-import { Token } from 'graphql';
 import Auth from '../utils/auth';
 
 
 
 const Profile = () => {
     // logged in user
-    const { loading, data} = useQuery(GET_POST);
-    const myPosts = data?.posts | [];
 
-    const { load, res } = useQuery(GET_ME);
+    const { loading, data } = useQuery(GET_ME);
+    const userData = data?.me || {};
     const [removePost] = useMutation(REMOVE_POST);
-    const userData = res?.me || {};
+
+    
     const handleDeletePost = async (postId) => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+    
 
-    if (!token) {
-        return false;
-        }
+        if (!token) {
+            return false;
+            }
 
-        try {
-        const { data } = await removePost({
-            variables: { postId },
-        });
+            try {
+            const { data } = await removePost({
+                variables: { postId },
+            });
 
-        removePost(postId);
-        } catch (err) {
-        console.error(err);
+            removePost(postId);
+            } catch (err) {
+            console.error(err);
         }
     };
-    // Apply the transformation.
-    // userData.profilePic
-    // .transformation(new Transformation)
-    // .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
-    // .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
-    // .format('png');   // Deliver as PNG. */
-    if (loading || load) {
+    
+    if (loading) {
         return <div>Loading...</div>;
     }
-    
+    console.log(userData)
     return (
         <> 
         { 
-            Token ? (
+            Auth.loggedIn() ? (
                         <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
                             <main id="postContainer" className="col-9 border h-100 d-inline-block rounded overflow-hidden">
                                 <div id="postContainer d-flex">
-                                    <h2>My {userData.posts.length} Posts</h2>
+                                    <h2>My Posts</h2>
                                     {
                                         userData.posts.map((post) => {
                                             return(
