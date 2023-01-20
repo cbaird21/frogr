@@ -6,8 +6,8 @@ import Discover from './pages/Discover';
 import Profile from './pages/Profile';
 // import SearchPosts from './pages/SearchPost';
 import LikedPost from './pages/LikedPost';
-import Footer from './components/Footer';
-import Header from './components/Header';
+import Footer from './components/footer/index';
+import Header from './components/header/index';
 // import UploadWidget from './components/UploadWidget';
 
 // import { Component } from 'react';
