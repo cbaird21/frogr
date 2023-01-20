@@ -20,10 +20,6 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    userPic: {
-      type: String,
-      trim: true,
-    },
     // thoughts references the thoughtsSchema for all of a users' thoughts
     likedPosts: [
       {
