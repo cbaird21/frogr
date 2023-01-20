@@ -16,11 +16,15 @@ import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 //import React/bootstrap
 import { Card, Container} from 'react-bootstrap';
 
+//import PostForm
+import Postform from '../components/PostForm'
+import {useQuery} from '@apollo/client'
+import { GET_ME } from '../utils/queries';
 const myPosts = []; // array of this users posts with images from cloudinary 
 
-const me = "" // logged in user
 
 const Profile = () => {
+    const me = useQuery(GET_ME) // logged in user
     
   // Create and configure your Cloudinary instance.
     const cld = new Cloudinary({
@@ -47,20 +51,21 @@ const Profile = () => {
                         <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
                             <main className="col-9 border h-100 d-inline-block rounded overflow-hidden">
                                 <div id="postContainer d-flex">
+                                    <p> this container will display all user's posts</p>
                                     {
                                         myPosts.map((post) => {
                                             <Card className='m-3' style={{ width: '18rem' }}>
                                                 <Card.Header>
-                                                    <img alt="profile pic"></img><h3>Username</h3>
+                                                    <img alt="profile pic"></img><h3>{post.postAuthor}</h3>
                                                 </Card.Header>
                                                 <Card.Body>
                                                     <AdvancedImage cldImg={post.postImage} />
                                                     <Card.Text>
-                                                        post description
+                                                        {post.description}
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
-                                                    <small className="text-muted">createdAt</small>
+                                                    <small className="text-muted">createdAt {post.createdAt}</small>
                                                 </Card.Footer>
                                             </Card>
                                         })
@@ -74,6 +79,9 @@ const Profile = () => {
                                         <h2 className="p-2 d-inline">{`${me.username}}`}</h2>
                                         <p className="p-2">{`${myPosts.length}`} Posts </p>
                                     </Card.Header>
+                                    <Card.Body>
+                                        <Postform/>
+                                    </Card.Body>
                                 </Card>
                             </aside>
                         </Container>

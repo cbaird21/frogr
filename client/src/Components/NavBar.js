@@ -26,7 +26,7 @@ const AppNavbar = () => {
                     <Navbar.Collapse id='navbar'>
                         <Nav className='ms-auto'>
                             <Nav.Link as={Link} to='/'>
-                                frogr
+                                Discover
                             </Nav.Link>
                             {/* if user is logged in show saved Liked Posts and logout */}
                             {Auth.loggedIn() ? (
@@ -34,6 +34,7 @@ const AppNavbar = () => {
                                     <Nav.Link as={Link} to='/saved'>
                                         See Your Liked Posts
                                     </Nav.Link>
+                                    <Nav.Link as={Link} to='/profile'>Profile</Nav.Link>
                                     <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                                 </>
                             ) : (

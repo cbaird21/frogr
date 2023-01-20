@@ -10,7 +10,6 @@ import {fill} from "@cloudinary/url-gen/actions/resize";
 import { Container, Card } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
-
 const Discover = () => {
     // 2. Set your cloud name
     //========================
@@ -40,6 +39,7 @@ const Discover = () => {
             <h1>This is the discover page</h1>
             <Card className='m-3' style={{ width: '18rem' }}>
                 <CardHeader>
+                    
                     <img alt="profile pic"></img><h3>Username</h3>
                 </CardHeader>
                 <Card.Body>
