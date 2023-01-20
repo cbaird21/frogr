@@ -9,9 +9,6 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
 
-import {useQuery} from '@apollo/client';
-import {GET_POST} from '../utils/queries';
-
 const Discover = () => {
   const { loading, data } = useQuery(GET_POST);
   const posts = data?.posts || [];
@@ -47,7 +44,6 @@ const Discover = () => {
       </Container>
     </>
   );
-
 };
 
 export default Discover;
