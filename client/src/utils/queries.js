@@ -22,14 +22,15 @@ export const GET_ME = gql`
 `;
 
 export const GET_POST = gql`
-  query posts {
+
+  query posts{
     posts {
       _id
       postAuthor
       postText
       postImage
       createdAt
-      comments {
+      comments{
         commentText
         commentAuthor
         createdAt
