@@ -13,11 +13,6 @@ export const ADD_USER = gql`
     }
   }
 `;
-
-// EDIT USER
-// update profile picture mutation
-// -edits the post.authotPIC -edits user.profilePic -sets authorPic to all posts fromt that user 
-
 // LOGIN will execute the login mutation set up using Apollo Server.
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -41,9 +36,7 @@ export const ADD_POST = gql`
     }
   }
 `;
-// Edit POST
 
-// 
 // ADD_THOUGHT will execute the addThought mutation.
 export const ADD_THOUGHT = gql`
   mutation addThought($thoughtText: String!) {

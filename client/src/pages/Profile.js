@@ -57,7 +57,7 @@ const Profile = () => {
                                             return(
                                                 <Card className='m-3' style={{ width: '18rem' }}>
                                                 <Card.Header>
-                                                    <img alt="profile pic">{post.authorPic}</img><h3>{post.postAuthor}</h3>
+                                                    <img alt="profile pic"></img><h3>{post.postAuthor}</h3>
                                                 </Card.Header>
                                                 <Card.Body>
                                                     <AdvancedImage cldImg={post.postImage} />

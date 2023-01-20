@@ -5,7 +5,7 @@ const typeDefs = gql`
     _id: ID
     name: String
   }
-# add profilePic
+
   type User {
     _id: ID
     username: String
@@ -13,7 +13,7 @@ const typeDefs = gql`
     password: String
     posts: [Post]!
   }
-# add authorPic
+
   type Post {
     _id: ID
     postImage: String
@@ -45,9 +45,8 @@ const typeDefs = gql`
     me: User
   }
 
-#  add editPost and editUser
   type Mutation {
-    addProfile(name: String!): Profile  # combine profile and user
+    addProfile(name: String!): Profile
     removeProfile(profileId: ID!): Profile
     addUser(username: String!, email: String!, password: String!): Auth
     removeUser(userId: ID!): User
