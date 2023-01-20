@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 // Import the GraphQL mutation
 import { ADD_POST } from '../../utils/mutations';
-
+import Uploadwidget from '../UploadWidget';
 
 const PostForm = () => {
     const [postImage, setImage] = useState('');
@@ -33,11 +33,15 @@ const PostForm = () => {
             >
                 <div className="col-12 col-lg-9">
                     <input
+                        type="button"
                         placeholder="Add your image post here..."
                         value={postImage}
                         className="form-input w-100"
                         onChange={(event) => setImage(event.target.value)}
-                    />
+                    />        
+                    <Uploadwidget/>
+                        
+                    
                 </div>
 
                 <div className="col-12 col-lg-9">
