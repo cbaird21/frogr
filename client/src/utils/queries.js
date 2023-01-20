@@ -22,14 +22,18 @@ export const GET_ME = gql`
 `;
 
 export const GET_POST = gql`
-  query allPost{
-    post {
+  query posts{
+    posts {
       _id
-      authors
-      description
-      title
-      image
-      link
+      postAuthor
+      postText
+      postImage
+      createdAt
+      comments{
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
   }
 `
