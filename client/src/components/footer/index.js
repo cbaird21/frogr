@@ -58,7 +58,7 @@ const Footer = () => {
             <li className="nav-item">
               <a
                 className="nav-link"
-                href="https://github.com/laborde"
+                href="https://github.com/andylaborde"
                 target="blank"
               >
                 {/* <FontAwesomeIcon icon="fa-brands fa-github" /> */}
