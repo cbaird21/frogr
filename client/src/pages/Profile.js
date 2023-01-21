@@ -7,16 +7,35 @@ import { Card, Container } from 'react-bootstrap';
 
 //import PostForm
 import Postform from '../components/PostForm'
-import {useQuery} from '@apollo/client'
+import {useQuery, useMutation} from '@apollo/client'
 import { GET_ME } from '../utils/queries';
+import { REMOVE_POST } from '../utils/mutations';
 import Auth from '../utils/auth'
+import { removePostId } from "../utils/localStorage";
 
 const Profile = () => {
     const { loading, error, data } = useQuery(GET_ME); // logged in user
+    const [removePost] = useMutation(REMOVE_POST);
     const userData = data?.me || {};
     console.log(userData);
     
-    // Create and configure your Cloudinary instance.
+    const handleDeletePost = async (postId) => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+            }
+
+            try {
+            const { data } = await removePost({
+                variables: { postId },
+            });
+
+            removePostId(postId);
+            } catch (err) {
+            console.error(err);
+            }
+        };
     
     if (loading) {
         return <div>Loading...</div>;
@@ -51,9 +70,11 @@ const Profile = () => {
                                                     <Card.Text>
                                                         {post.postText}
                                                     </Card.Text>
+                                                    
                                                 </Card.Body>
                                                 <Card.Footer>
-                                                    <small className="text-muted">createdAt {post.createdAt}</small>
+                                                    <img alt="removeIcon" src="/images/icons8-trash-25.png" className="p-2 ms-auto" ></img>
+                                                    <small className="text-muted ms-auto"> {post.createdAt}</small>
                                                 </Card.Footer>
                                             </Card>
                                             )

@@ -138,7 +138,7 @@ const resolvers = {
     },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        return Post.findOneAndUpdate(
+        const post = await Post.findOneAndUpdate(
           { _id: postId },
           {
             $addToSet: {
@@ -150,6 +150,7 @@ const resolvers = {
             runValidators: true,
           }
         );
+        return post.save();
       }
       throw new AuthenticationError("You need to be logged in!");
     },
