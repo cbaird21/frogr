@@ -49,7 +49,7 @@ const Discover = () => {
                     <Card.Footer>
                       <Accordion defaultActiveKey="null" flush>
                         <Accordion.Item eventKey="1">
-                          <Accordion.Header>Comment</Accordion.Header>
+                          <Accordion.Header className="width-15">Comment</Accordion.Header>
                           <Accordion.Body>
                             <Commentlist />
                             <Commentform />
