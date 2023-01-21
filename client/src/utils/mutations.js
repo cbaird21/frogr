@@ -135,18 +135,16 @@ export const REMOVE_THOUGHT_COMMENT = gql`
 `;
 
 // LIKED_POST will execute the likePost mutation.
-export const LIKED_POST = gql`
-  mutation likedPost($likedPost: PostData!) {
-    likedPost(likedPost: $likedPost) {
+export const LIKE_POST = gql`
+  mutation saveLike($newLike: likedPost!) {
+    saveLike(newLike: $newLike) {
       _id
       username
       likedPost {
-        postId
-        authors
-        description
-        title
-        image
-        link
+        _id
+        postText
+        postAuthor
+        postImage
       }
     }
   }

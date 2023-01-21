@@ -21,7 +21,9 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts").populate('likedPosts');
+        return User.findOne({ _id: context.user._id })
+          .populate("posts")
+          .populate("likedPosts");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -134,6 +136,17 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    // saveLike: async (parent, { newLike }, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { likedPosts: newLike } },
+    //       { new: true }
+    //     );
+    //     return updatedUser;
+    //   }
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
   },
 };
 
