@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 // import "../css/styles.css";
 
 import Auth from "../../utils/auth";
@@ -10,7 +10,7 @@ const Header = () => {
     Auth.logout();
   };
   return (
-    <header className=" bg-primary text-light mb-4 py-3 flex-row align-center">
+    <header className=" bg-primary text-light mb-4 py-3 flex-row align-center fixed-top">
       <AppNavBar />
     </header>
   );

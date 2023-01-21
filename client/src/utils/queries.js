@@ -16,7 +16,6 @@ export const GET_ME = gql`
         postImage
         createdAt
       }
-      
     }
   }
 `;
@@ -33,16 +32,9 @@ export const GET_POST = gql`
         commentText
         commentAuthor
         createdAt
-      }
-      likedPost{
-        postId
-        postAuthors
-        postText
-        postImage
-        createdAT
-      }
     }
   }
+}
 `;
 
 export const GET_SINGLE_POST = gql`
