@@ -61,25 +61,27 @@ const Profile = () => {
         { 
             Auth.loggedIn ? (
                         <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
-                            <main className="col-9 border h-100 d-inline-block rounded overflow-hidden">
+                            <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
                                 <div id="postContainer d-flex">
                                     <p> this container will display all user's posts</p>
                                     {
-                                        userData.map((post) => {
+                                        userData.posts.map((post) => {
+                                            return(
                                             <Card className='m-3' style={{ width: '18rem' }}>
                                                 <Card.Header>
-                                                    <img alt="profile pic"></img><h3>{post.postAuthor}</h3>
+                                                    <Card.Img alt="profile pic"></Card.Img><h3>{post.postAuthor}</h3>
                                                 </Card.Header>
                                                 <Card.Body>
-                                                    <AdvancedImage cldImg={post.postImage} />
+                                                    <Card.Img src={post.postImage}></Card.Img>
                                                     <Card.Text>
-                                                        {post.description}
+                                                        {post.postText}
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
                                                     <small className="text-muted">createdAt {post.createdAt}</small>
                                                 </Card.Footer>
                                             </Card>
+                                            )
                                         })
                                     }
                                 </div>
