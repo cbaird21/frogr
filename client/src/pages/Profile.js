@@ -19,43 +19,53 @@ import { Card, Container} from 'react-bootstrap';
 //import PostForm
 import Postform from '../components/PostForm'
 import {useQuery} from '@apollo/client'
-import { GET_ME } from '../utils/queries';
+import { GET_ME, GET_POST } from '../utils/queries';
 import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth'
 const myPosts = []; // array of this users posts with images from cloudinary 
 
 
 const Profile = () => {
-    const {loading, data} = useQuery(GET_ME) // logged in user
+    const { loading, error, data } = useQuery(GET_ME); // logged in user
     const userData = data?.me || {};
+    console.log(userData);
     
-  // Create and configure your Cloudinary instance.
+    // Create and configure your Cloudinary instance.
     const cld = new Cloudinary({
         cloud: {
-        cloudName: 'demo'
+            cloudName: 'demo'
         }
     }); 
-
+    
     // Use the image with public ID, 'front_face'.
     const profilePic = cld.image('front_face');
-
+    
     // Apply the transformation.
     profilePic
     .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
     .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
     .format('png');   // Deliver as PNG. */
-    
-    const loggedIn = true
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (error) {
+        return <p>Error!</p>
+    }
+    console.log(data);
+    console.log(error);
+
+    const loggedIn = true;
     // Render the transformed image in a React component.
     return (
         <> 
         { 
-            loggedIn ? (
+            Auth.loggedIn ? (
                         <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
                             <main className="col-9 border h-100 d-inline-block rounded overflow-hidden">
                                 <div id="postContainer d-flex">
                                     <p> this container will display all user's posts</p>
                                     {
-                                        myPosts.map((post) => {
+                                        userData.map((post) => {
                                             <Card className='m-3' style={{ width: '18rem' }}>
                                                 <Card.Header>
                                                     <img alt="profile pic"></img><h3>{post.postAuthor}</h3>
@@ -77,9 +87,9 @@ const Profile = () => {
                             <aside className="col-3">    
                                 <Card bg="secondary" className="w-100 h-100  d-inline-block">
                                     <Card.Header className="p-4 m-0  border-bottom">
-                                        <AdvancedImage className="p-2" cldImg={profilePic} />
-                                        {/* <h2 className="p-2 d-inline">{`${me.username}}`}</h2> */}
-                                        <p className="p-2">{`${myPosts.length}`} Posts </p>
+                                        <AdvancedImage className="p-2" cldImg={userData.userPic} />
+                                        <h2 className="p-2 d-inline">{userData.username}</h2>
+                                        <p className="p-2">{`${userData.posts.length}`} Posts </p>
                                     </Card.Header>
                                     <Card.Body>
                                         <Postform/>
