@@ -51,6 +51,7 @@ const typeDefs = gql`
       ): Auth
       editUser(username: String, password: String, userPic: String): Auth
       likedPost(postId: ID!): Post
+    unlikePost(postId: ID!): Post
     removeUser(userId: ID!): User
       login(email: String!, password: String!): Auth
       addPost(postImage: String, postText: String): Post
