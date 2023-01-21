@@ -37,15 +37,17 @@ export const ADD_POST = gql`
   }
 `;
 
-// ADD_THOUGHT will execute the addThought mutation.
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
+// REMOVE_POST will execute the removePost mutation.
+export const REMOVE_POST = gql`
+  mutation removePost($postId: ID!) {
+    removePost(postId: $postId ) {
       _id
-      username
-      addThought {
-        thoughtText
-        thoughtAuthor
+      postAuthor
+      likedPost {
+        postImage
+        postText
+        postAuthor
+        createdAt
       }
     }
   }
@@ -54,30 +56,11 @@ export const ADD_THOUGHT = gql`
 // ADD_COMMENT will execute the addThought mutation
 export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $commentText: String!) {
-    addComment(_id: $postId, commentText: $commentText) {
+    addComment(postId: $postId, commentText: $commentText) {
       _id
-      username
-      addPostComment {
-        commentText
-        commentAuthor
-      }
-    }
-  }
-`;
-
-
-
-// REMOVE_POST will execute the removePost mutation.
-export const REMOVE_POST = gql`
-  mutation removePost($postId: ID!) {
-    removePost(postId: $postId) {
-      _id
-      username
-      removePost {
-        postImage
-        postText
-        postAuthor
-      }
+      commentText
+      commentAuthor
+      createdAt
     }
   }
 `;
@@ -86,9 +69,10 @@ export const REMOVE_POST = gql`
 // REMOVE_POST_COMMENT will execute the removePostComment mutation
 export const REMOVE_COMMENT = gql`
   mutation removeComment($postId: ID!, $commentId: ID!) {
-    removeComment(_id: $postId, _id: $commentId) {
+    removeComment(postId: $postId, commentId: $commentId) {
       _id
-      removePostComment {
+      comments {
+        _id
         commentText
         commentAuthor
       }
@@ -98,17 +82,17 @@ export const REMOVE_COMMENT = gql`
 
 // LIKED_POST will execute the likePost mutation.
 export const LIKED_POST = gql`
-  mutation likedPost($likedPost: PostData!) {
-    likedPost(likedPost: $likedPost) {
+  mutation likedPost($postId:ID!) {
+    likedPost(postId: $postId) {
       _id
       username
       likedPost {
-        postId
-        authors
-        description
-        title
-        image
-        link
+      postImage
+      postText
+      postAuthor
+      likedBy
+      createdAt
+      comments
       }
     }
   }

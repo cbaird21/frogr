@@ -1,6 +1,6 @@
 import React from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-
+import Accordion from 'react-bootstrap/Accordion';
 
 import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
@@ -46,7 +46,14 @@ const Discover = () => {
                       </small>
                     </Card.Body>
                     <Card.Footer>
-                      <Commentform />
+                      <Accordion defaultActiveKey="null" flush>
+                        <Accordion.Item eventKey="1">
+                          <Accordion.Header>Comment</Accordion.Header>
+                          <Accordion.Body>
+                            <Commentform />
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
                     </Card.Footer>
                   </Card>
                 );
