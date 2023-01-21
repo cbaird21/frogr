@@ -6,7 +6,8 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/CommentForm/index"
+import Commentform from "../components/commentForm/index"
+import Commentlist from "../components/commentList/index";
 
 
 const Discover = () => {
@@ -50,6 +51,7 @@ const Discover = () => {
                         <Accordion.Item eventKey="1">
                           <Accordion.Header>Comment</Accordion.Header>
                           <Accordion.Body>
+                            <Commentlist />
                             <Commentform />
                           </Accordion.Body>
                         </Accordion.Item>

@@ -10,15 +10,15 @@ const CommentForm = ({ thoughtId }) => {
     const [commentText, setCommentText] = useState('');
     const [characterCount, setCharacterCount] = useState(0);
 
-    const [addComment, { error }] = useMutation(ADD_COMMENT);
+    const [addComment, {data, loading, error }] = useMutation(ADD_COMMENT);
 
-    const handleFormSubmit = async (event) => {
+    const handleAddComment = async (postId, commentText, event) => {
         event.preventDefault();
 
         try {
             const { data } = await addComment({
                 variables: {
-                    thoughtId,
+                    postId,
                     commentText,
                     commentAuthor: Auth.getProfile().data.username,
                 },
@@ -53,7 +53,7 @@ const CommentForm = ({ thoughtId }) => {
                     </p>
                     <form
                         className="flex-row justify-center justify-space-between-md align-center"
-                        onSubmit={handleFormSubmit}
+                        onSubmit={handleAddComment}
                     >
                         <div className="col-12 col-lg-9">
                             <textarea

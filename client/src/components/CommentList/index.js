@@ -1,22 +1,32 @@
 import React from 'react';
+import { useQuery } from "@apollo/client";
+import { GET_POST } from "../../utils/queries";
 
-const CommentList = ({ comments = [] }) => {
-    if (!comments.length) {
-        return <h3>No Comments Yet</h3>;
+const CommentList = () => {
+    const { loading, data } = useQuery(GET_POST);
+    const posts = data?.posts || [];
+    // Render the image in a React component.
+    // loading
+    if (loading) {
+        return <div>Loading...</div>;
     }
+    console.log();
+
+    
+
+    // if (!posts.comments.length) {
+    //     return <h3>No Comments Yet</h3>;
+    // }
 
     return (
         <>
-            <h3
-                className="p-5 display-inline-block"
-                style={{ borderBottom: '1px dotted #1a1a1a' }}
-            >
-                Comments
-            </h3>
+            
             <div className="flex-row my-4">
-                {comments &&
-                    comments.map((comment) => (
-                        <div key={comment._id} className="col-12 mb-3 pb-3">
+                {posts.map((post) => (
+                    post.comments.map((comment)=> {
+                        return(
+
+                            <div key={comment._id} className="col-12 mb-3 pb-3">
                             <div className="p-3 bg-dark text-light">
                                 <h5 className="card-header">
                                     {comment.commentAuthor} commented{' '}
@@ -27,6 +37,8 @@ const CommentList = ({ comments = [] }) => {
                                 <p className="card-body">{comment.commentText}</p>
                             </div>
                         </div>
+                            )
+                        })
                     ))}
             </div>
         </>
