@@ -1,6 +1,6 @@
 // This will hold the query GET_ME, which will execute the me query set up using Apollo Server.
 
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // expand query to include all keys returned on object
 export const GET_ME = gql`
@@ -8,19 +8,11 @@ export const GET_ME = gql`
     me {
       _id
       username
-      email
       userPic
-      likedPost {
-        postId
-        postAuthor
-        postText
-        postImage
-        createdAT
-      }
       posts{
-        postId
-        postAuthor
+        _id
         postText
+        postAuthor
         postImage
         createdAt
       }
@@ -30,15 +22,14 @@ export const GET_ME = gql`
 `;
 
 export const GET_POST = gql`
-
-  query posts{
+  query posts {
     posts {
       _id
       postAuthor
       postText
       postImage
       createdAt
-      comments{
+      comments {
         commentText
         commentAuthor
         createdAt
@@ -55,8 +46,8 @@ export const GET_POST = gql`
 `;
 
 export const GET_SINGLE_POST = gql`
-  query getSinglePost($postId: ID!){
-    post(postID: $postId){
+  query getSinglePost($postId: ID!) {
+    post(postID: $postId) {
       _id
       authors
       description
@@ -65,4 +56,4 @@ export const GET_SINGLE_POST = gql`
       link
     }
   }
-`
+`;

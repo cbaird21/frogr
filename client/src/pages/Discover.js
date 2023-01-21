@@ -9,8 +9,7 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
 
-// import {useQuery} from '@apollo/client';
-// import { GET_POST } from '../utils/queries';
+
 
 const Discover = () => {
   const { loading, data } = useQuery(GET_POST);
@@ -29,11 +28,15 @@ const Discover = () => {
           return (
             <Card className="m-3" style={{ width: "18rem" }}>
               <CardHeader>
-                <img src={`"${post.profilePic}"`} alt="profile pic"></img>
+                <Card.Img
+                  style={{ width: "18rem" }}
+                  src={post.profilePic}
+                  alt="profile pic"
+                ></Card.Img>
                 <h3>{post.postAuthor}</h3>
               </CardHeader>
               <Card.Body>
-                <img src={post.postImage} alt="post image"></img>
+                <Card.Img src={post.postImage} alt="post image"></Card.Img>
                 <Card.Text>{post.postText}</Card.Text>
               </Card.Body>
               <Card.Footer>

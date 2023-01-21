@@ -11,62 +11,63 @@ import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
 import { Card, Container, Button} from 'react-bootstrap';
 //import PostForm
 import Postform from '../components/PostForm'
-import {useQuery, useMutation} from '@apollo/client';
-import { GET_ME } from '../utils/queries';
-import { REMOVE_POST } from '../utils/mutations';
-import Auth from '../utils/auth';
-
+import {useQuery} from '@apollo/client'
+import { GET_ME, GET_POST } from '../utils/queries';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth'
+const myPosts = []; // array of this users posts with images from cloudinary 
 
 
 const Profile = () => {
+    const { loading, error, data } = useQuery(GET_ME); // logged in user
+    const userData = data?.me || {};
+    console.log(userData);
     
-    // get logged in user data
-    const { loading, data } = useQuery(GET_ME);
-    const userData = data?.me || [{}];
-    const [removePost] = useMutation(REMOVE_POST);
-    
-    const handleDeletePost = async (postId) => {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-    
-        if (!token) {
-            return false;
-            }
-
-            try {
-            const { data } = await removePost({
-                variables: { postId },
-            });
-
-            removePost(postId);
-            } catch (err) {
-            console.error(err);
+    // Create and configure your Cloudinary instance.
+    const cld = new Cloudinary({
+        cloud: {
+            cloudName: 'demo'
         }
-    };
-
+    }); 
+    
+    // Use the image with public ID, 'front_face'.
+    const profilePic = cld.image('front_face');
+    
+    // Apply the transformation.
+    profilePic
+    .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
+    .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
+    .format('png');   // Deliver as PNG. */
     if (loading) {
         return <div>Loading...</div>;
     }
+    if (error) {
+        return <p>Error!</p>
+    }
+    console.log(data);
+    console.log(error);
 
-    console.log(...userData)
+    const loggedIn = true;
+    // Render the transformed image in a React component.
     return (
         <> 
         { 
-            Auth.loggedIn() ? (
+            Auth.loggedIn ? (
                         <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
-                            <main id="postContainer" className="col-9 border h-100 d-inline-block rounded overflow-hidden">
+                            <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
                                 <div id="postContainer d-flex">
                                     <h2>My Posts</h2>
                                     {
                                         userData.posts.map((post) => {
                                             return(
-                                                <Card className='m-3' style={{ width: '18rem' }}>
+                                            <Card className='m-3' style={{ width: '18rem' }}>
                                                 <Card.Header>
-                                                    <img alt="profile pic" src={post.authorPic}></img><h3>{post.postAuthor}</h3>
+                                                    <Card.Img alt="profile pic"></Card.Img><h3>{post.postAuthor}</h3>
                                                 </Card.Header>
                                                 <Card.Body>
-                                                    <AdvancedImage cldImg={post.postImage} />
+                                                    <Card.Img src={post.postImage}></Card.Img>
                                                     <Card.Text>
-                                                        {post.description}
+                                                        {post.postText}
                                                     </Card.Text>
                                                 </Card.Body>
                                                 <Card.Footer>
@@ -78,7 +79,6 @@ const Profile = () => {
                                                 </Card.Footer>
                                             </Card>
                                             )
-                                            
                                         })
                                     }
                                 </div>
@@ -86,8 +86,8 @@ const Profile = () => {
                             <aside className="col-3">    
                                 <Card bg="secondary" className="w-100 h-100  d-inline-block">
                                     <Card.Header className="p-4 m-0  border-bottom">
-                                        <AdvancedImage className="p-2" cldImg={userData.profilePic} />
-                                        <h2 className="p-2 d-inline">{`${userData.username}}`}</h2>
+                                        <AdvancedImage className="p-2" cldImg={userData.userPic} />
+                                        <h2 className="p-2 d-inline">{userData.username}</h2>
                                         <p className="p-2">{`${userData.posts.length}`} Posts </p>
                                     </Card.Header>
                                     <Card.Body>

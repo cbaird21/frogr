@@ -7,8 +7,8 @@ const typeDefs = gql`
     email: String
     password: String
     userPic: String
-    likedPost: [Post]!
-    posts: [Post]!
+    likedPost: [Post]
+    posts: [Post]
   }
 
   type Post {
@@ -16,8 +16,8 @@ const typeDefs = gql`
     postImage: String
     postText: String
     postAuthor: String
-    comments: [Comment]!
-    likedPost: [User]!
+    comments: [Comment]
+    likedPost: [User]
     createdAt: String
   }
 
