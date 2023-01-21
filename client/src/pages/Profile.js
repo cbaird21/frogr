@@ -24,11 +24,11 @@ const myPosts = []; // array of this users posts with images from cloudinary
 
 
 const Profile = () => {
-    const { loading, data } = useQuery(GET_ME);
-    const userData = data?.me || [{}];
-    console.log(userData)
-    // const me = useQuery(GET_ME) // logged in user
-    // console.log(me)
+    // const { loading, data } = useQuery(GET_ME);
+    // const userData = data?.me || [];
+    // console.log(userData)
+    const me = useQuery(GET_ME) // logged in user
+    console.log(me)
     // Create and configure your Cloudinary instance.
     const cld = new Cloudinary({
         cloud: {
@@ -47,9 +47,9 @@ const Profile = () => {
 
     const loggedIn = true
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    // if (loading) {
+    //     return <div>Loading...</div>;
+    // }
     // Render the transformed image in a React component.
     return (
         <>
@@ -85,8 +85,8 @@ const Profile = () => {
                         <aside className="col-3">
                             <Card bg="secondary" className="w-100 h-100  d-inline-block">
                                 <Card.Header className="p-4 m-0  border-bottom">
-                                    <AdvancedImage className="p-2" cldImg={profilePic} />
-                                    <h2 className="p-2 d-inline">{userData.username}</h2>
+                                    <AdvancedImage className="p-2" cldImg={me.profilePic} />
+                                    <h2 className="p-2 d-inline">{me.username}</h2>
                                     <p className="p-2">{myPosts.length} Posts </p>
                                 </Card.Header>
                                 <Card.Body>
