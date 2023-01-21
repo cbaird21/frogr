@@ -67,7 +67,7 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <>
-                    <Header />
+                <Header />
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
                         <Route exact path='/saved' element={<LikedPost />} />
