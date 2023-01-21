@@ -1,29 +1,15 @@
 import React from 'react'
-import {AdvancedImage} from '@cloudinary/react';
-import {Cloudinary} from "@cloudinary/url-gen";
-
-
-// Import required actions.
-import {thumbnail} from "@cloudinary/url-gen/actions/resize";
-import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
-
-
-// Import required qualifiers.
-
-import {focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
-import {FocusOn} from "@cloudinary/url-gen/qualifiers/focusOn";
+import { AdvancedImage } from '@cloudinary/react';
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 
 //import React/bootstrap
-import { Card, Container} from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 
 //import PostForm
 import Postform from '../components/PostForm'
 import {useQuery} from '@apollo/client'
-import { GET_ME, GET_POST } from '../utils/queries';
-import { useMutation } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth'
-const myPosts = []; // array of this users posts with images from cloudinary 
-
 
 const Profile = () => {
     const { loading, error, data } = useQuery(GET_ME); // logged in user
@@ -31,20 +17,7 @@ const Profile = () => {
     console.log(userData);
     
     // Create and configure your Cloudinary instance.
-    const cld = new Cloudinary({
-        cloud: {
-            cloudName: 'demo'
-        }
-    }); 
     
-    // Use the image with public ID, 'front_face'.
-    const profilePic = cld.image('front_face');
-    
-    // Apply the transformation.
-    profilePic
-    .resize(thumbnail().width(50).height(50).gravity(focusOn(FocusOn.face())))  // Crop the image.
-    .roundCorners(byRadius(100))   // Position the logo.  // Rotate the result.
-    .format('png');   // Deliver as PNG. */
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -54,22 +27,24 @@ const Profile = () => {
     console.log(data);
     console.log(error);
 
-    const loggedIn = true;
     // Render the transformed image in a React component.
     return (
         <> 
-        { 
-            Auth.loggedIn ? (
-                        <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
-                            <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
-                                <div id="postContainer d-flex">
-                                    <p> this container will display all user's posts</p>
-                                    {
-                                        userData.posts.map((post) => {
-                                            return(
-                                            <Card className='m-3' style={{ width: '18rem' }}>
-                                                <Card.Header>
-                                                    <Card.Img alt="profile pic"></Card.Img><h3>{post.postAuthor}</h3>
+        { Auth.loggedIn ? (
+            <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
+                <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
+                    <div id="postContainer d-flex">
+                        <h2>My Posts</h2>
+                        <ResponsiveMasonry
+                            columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+                        >
+                        <Masonry> 
+                            {
+                                userData.posts.map((post) => {
+                                    return(
+                                        <Card key={post._id} className='m-3' style={{ width: '18rem' }}>
+                                            <Card.Header>
+                                                <Card.Img alt="profile pic"></Card.Img><h3>{post.postAuthor}</h3>
                                                 </Card.Header>
                                                 <Card.Body>
                                                     <Card.Img src={post.postImage}></Card.Img>
@@ -84,6 +59,8 @@ const Profile = () => {
                                             )
                                         })
                                     }
+                                    </Masonry>
+                                    </ResponsiveMasonry>
                                 </div>
                             </main>
                             <aside className="col-3">    
@@ -108,7 +85,7 @@ const Profile = () => {
             
             
         </>
-        
+
 
     )
 };
