@@ -1,9 +1,7 @@
 import React from "react";
-import { AdvancedImage } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { scale } from "@cloudinary/url-gen/actions/resize";
-// Import any actions required for transformations.
-import { fill } from "@cloudinary/url-gen/actions/resize";
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
+
+
 import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
@@ -12,44 +10,81 @@ import { GET_POST } from "../utils/queries";
 
 
 const Discover = () => {
-    const { loading, data } = useQuery(GET_POST);
-    const posts = data?.posts || [];
-    // Render the image in a React component.
-    // loading
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    console.log(posts);
-    return (
-        <>
-            <Container fluid>
-                <h1>This is the discover page</h1>
-                {posts.map((post) => {
-                    return (
-                        <Card className="m-3" style={{ width: "18rem" }}>
-                            <CardHeader>
-                                <Card.Img
-                                    style={{ width: "18rem" }}
-                                    src={post.profilePic}
-                                    alt="profile pic"
-                                ></Card.Img>
-                                <h3>{post.postAuthor}</h3>
-                            </CardHeader>
-                            <Card.Body>
-                                <Card.Img src={post.postImage} alt="post image"></Card.Img>
-                                <Card.Text>{post.postText}</Card.Text>
-                            </Card.Body>
-                            <Card.Footer>
-                                <small className="text-muted">
-                                    created at: {post.createdAt}
-                                </small>
-                            </Card.Footer>
-                        </Card>
-                    );
-                })}
-            </Container>
-        </>
-    );
+  const { loading, data } = useQuery(GET_POST);
+  const posts = data?.posts || [];
+  // Render the image in a React component.
+  // loading
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log(posts);
+  return (
+    <>
+      <Container fluid className="row vh-100 mb-2">
+        <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
+        <h1>Hop around and find out</h1>
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
+        >
+          <Masonry> 
+            {posts.map((post) => {
+              return (
+                <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
+                  <CardHeader>
+                    <Card.Img
+                      style={{ width: "18rem" }}
+                      src={post.profilePic}
+                      alt="profile pic"
+                      ></Card.Img>
+                    <h3>{post.postAuthor}</h3>
+                  </CardHeader>
+                  <Card.Body>
+                    <Card.Img src={post.postImage} alt="post image"></Card.Img>
+                    <Card.Text>{post.postText}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted">
+                      created at: {post.createdAt}
+                    </small>
+                  </Card.Footer>
+                </Card>
+              );
+            })}
+          </Masonry>
+        </ResponsiveMasonry>
+          </main>             
+      <aside className="col-3">    
+        <Card bg="secondary" className="w-100 h-100  d-inline-block">
+          <Card.Header className="p-4 m-0  border-bottom">
+            <h2>Discover different ideas!</h2>
+          </Card.Header>
+          <Card.Body>
+              {/* search form  */}
+              {/* <Form onSubmit={handleFormSubmit}>
+                <Form.Row>
+                <Col xs={12} md={8}>
+                <Form.Control
+                name="searchInput"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                type="text"
+                size="lg"
+                placeholder="Search to Discover new things!"
+                />
+                </Col>
+                <Col xs={12} md={4}>
+                <Button type="submit" variant="success" size="lg">
+                Submit Search
+                </Button>
+                </Col>
+                </Form.Row>
+              </Form> */}
+          </Card.Body>
+        </Card>
+      </aside>
+      </Container>
+    </>
+  );
 };
 
 export default Discover;

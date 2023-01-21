@@ -32,9 +32,9 @@ export const GET_POST = gql`
         commentText
         commentAuthor
         createdAt
-      }
     }
   }
+}
 `;
 
 export const GET_SINGLE_POST = gql`

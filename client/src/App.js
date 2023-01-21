@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
@@ -38,6 +39,7 @@ import Header from './components/header/index';
 //     }
 // }
 
+
 // this sends graphql operations to our remote endpoint, it might be what we were missing?
 const httpLink = createHttpLink({
     uri: '/graphql'
@@ -62,6 +64,22 @@ const client = new ApolloClient({
 });
 
 function App() {
+    
+    // making app window responsive
+    const [width, setWindowWidth] = useState(0)
+    useEffect(() => { 
+
+        updateDimensions();
+
+        window.addEventListener('resize', updateDimensions);
+        return () => 
+        window.removeEventListener('resize',updateDimensions);
+    }, [])
+
+    const updateDimensions = () => {
+        const width = window.innerWidth
+        setWindowWidth(width)
+    }
 
     return (
         <ApolloProvider client={client}>
