@@ -38,14 +38,14 @@ const LikeButton = () => {
     return (
       <Button
         disabled={savePostIds?.some(
-          (savedPostId) => savedBookId === book.bookId
+          (savedPostId) => savedPostId === post.postId
         )}
         className="btn-block btn-info"
-        onClick={() => handleSaveBook(book.bookId)}
+        onClick={() => handleLikePost(post.postId)}
       >
-        {savedBookIds?.some((savedBookId) => savedBookId === book.bookId)
-          ? "This book has already been saved!"
-          : "Save this Book!"}
+        {savedPostId?.some((savedPostId) => savedPostId === post.postId)
+          ? "This post has already been liked!"
+          : "Like this Post!"}
       </Button>
     );
 
