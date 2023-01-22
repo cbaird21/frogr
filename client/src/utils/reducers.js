@@ -2,7 +2,11 @@ import createId from './createId';
 import { useReducer } from 'react';
 import { ADD_COMMENT, REMOVE_COMMENT } from '../utils/actions';
 
-export const reducer = (state, action) => {
+const initialState = {
+    comments: []
+}
+
+export default reducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_COMMENT: {
             const newID = createId(state.comments);
@@ -24,6 +28,3 @@ export const reducer = (state, action) => {
         }
     }
 };
-export function useCommentReducer(initialState) {
-    return useReducer(reducer, initialState);
-}

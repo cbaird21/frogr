@@ -5,12 +5,12 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate([{ path: "posts" }, { path: "likedPosts" }]);
+      return User.find().populate([{ path: "posts" }, { path: "likedPost" }]);
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate([
         { path: "posts" },
-        { path: "likedPosts" },
+        { path: "likedPost" },
       ]);
     },
     posts: async (parent, { postAuthor }) => {
@@ -22,10 +22,8 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate([
-          { path: "posts" },
-          { path: "likedPosts" },
-        ]);
+        return User.findOne({ _id: context.user._id }).populate('posts').populate('likedPost');
+
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -138,19 +136,20 @@ const resolvers = {
     },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const post = await Post.findOneAndUpdate(
-          { _id: postId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
+        try {
+          return Post.findOneAndUpdate(
+            { _id: postId },
+            {
+              $addToSet: {
+                comments: { commentText, commentAuthor: context.user.username },
+              },
             },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        return post.save();
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        } catch (error) { console.log(JSON.stringify(error)) }
       }
       throw new AuthenticationError("You need to be logged in!");
     },

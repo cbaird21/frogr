@@ -1,26 +1,6 @@
 const { Schema, model } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
-
-// added commentSchema to be a sub Doc of postSchema, this will allow it to be called as an array when it comes to postSchema comments
-const commentSchema = new Schema({
-  commentText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
-  },
-  commentAuthor: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-    get: (timestamp) => dateFormat(timestamp),
-  },
-});
-
 // post schema is what allows us to map through posts
 const postSchema = new Schema({
   postImage: {
@@ -49,7 +29,25 @@ const postSchema = new Schema({
     default: Date.now,
     get: (timestamp) => dateFormat(timestamp),
   },
-  comments: [commentSchema]
+  comments: [
+    {
+      commentText: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 280,
+      },
+      commentAuthor: {
+        type: String,
+        required: true,
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
+    }
+  ],
 });
 
 const Post = model("Post", postSchema);
