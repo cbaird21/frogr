@@ -31,23 +31,24 @@ const Discover = () => {
 
     const handleLikePost = async (postId) => {
         
-        const postToLike = posts.find((post) => post._id === postId);
+        // const postToLike = posts.find((post) => post._id === postId);
         // const { key, value } = event.target;
         // setSavedPostIds( {...savedPostIds, [key]: value})
 
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        if (!token) {
-            return false;
-        }
+        // if (!token) {
+        //     return false;
+        // }
 
+        // error on click says "cannot query username on type post"
         try {
             const {data} = await savePost({
-                variables: { postId: postToLike},
+                variables: { postId: postId},
             });
-            setSavedPostIds([...savedPostIds, postToLike.postId]);
+            setSavedPostIds([...savedPostIds, postId]);
         } catch (err) {
-            console.error(err);
+            console.error(JSON.stringify(err));
         }
         console.log(postId)
     };
@@ -98,13 +99,13 @@ const Discover = () => {
                       <Card.Text>{post.postText}</Card.Text>
                       <Button
                         disabled={savedPostIds?.some(
-                          (savedPostId) => savedPostId === postId
+                          (savedPostId) => savedPostId === post._id
                         )}
                         className="btn-block btn-info"
-                        onClick={() => handleLikePost(post.postId)}
+                        onClick={() => handleLikePost(post._id)}
                       >
                         {savedPostIds?.some(
-                          (savedPostId) => savedPostId === postId
+                          (savedPostId) => savedPostId === post._id
                         )
                           ? "Liked!"
                           : "Like Post"}
