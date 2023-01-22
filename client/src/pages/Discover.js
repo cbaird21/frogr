@@ -6,11 +6,12 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/commentForm/index"
-import Commentlist from "../components/commentList/index";
+import Commentform from "../components/CommentForm"
+import Commentlist from "../components/CommentList";
 
 import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
+// import { UNLIKE_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { savePostIds, getSavedPostIds } from "../utils/localStorage";
@@ -22,25 +23,38 @@ const Discover = () => {
   const posts = data?.posts || [];
   const postId = posts._id;
 
-  const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
-  const [savePost, { error }] = useMutation(LIKED_POST);
+    const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
+    const [savePost, { error }] = useMutation(LIKED_POST);
+    // const [unlikePost, {error1}] = useMutation(UNLIKE_POST);
 
   useEffect(() => {
     return () => savePostIds(savedPostIds)
   });
 
-  const handleLikePost = async (postId) => {
+    const handleLikePost = async (postId) => {
+        
+        try {
+            const {data} = await savePost({
+                variables: { postId: postId, likedPost: postId},
+            });
+            setSavedPostIds([...savedPostIds, postId]);
+        } catch (err) {
+            console.error(JSON.stringify(err));
+        }
+        console.log(postId)
+    };
 
-    try {
-      const { data } = await savePost({
-        variables: { postId: postId },
-      });
-      setSavedPostIds([...savedPostIds, postId]);
-    } catch (err) {
-      console.error(JSON.stringify(err));
-    }
-    console.log(postId)
-  };
+    // const handleUnlike = async (postId) => {
+
+    //   try {
+    //     const {data} = await unlikePost({
+    //       variables: { likedPost: postId },
+    //     });
+    //     setSavedPostIds([...savePostIds, postId]);
+    //   } catch (err) {
+    //     console.error(JSON.stringify(err));
+    //   }
+    // };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -60,7 +74,7 @@ const Discover = () => {
               {posts.map((post) => {
                 return (
                   <Card
-                    key={post.postid}
+                    key={post._id}
                     className="m-3"
                     style={{ width: "18rem" }}
                   >
@@ -89,7 +103,7 @@ const Discover = () => {
 
                       {/* like post button */}
                       {/* should only view when logged in! */}
-                      <Button
+                    <Button
                         disabled={savedPostIds?.some(
                           (savedPostId) => savedPostId === post._id
                         )}
