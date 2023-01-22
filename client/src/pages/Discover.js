@@ -7,7 +7,7 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
 import Commentform from "../components/CommentForm"
-import Commentlist from "../components/CommentList";
+
 
 import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
@@ -23,38 +23,38 @@ const Discover = () => {
   const posts = data?.posts || [];
   const postId = posts._id;
 
-    const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
-    const [savePost, { error }] = useMutation(LIKED_POST);
-    // const [unlikePost, {error1}] = useMutation(UNLIKE_POST);
+  const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
+  const [savePost, { error }] = useMutation(LIKED_POST);
+  // const [unlikePost, {error1}] = useMutation(UNLIKE_POST);
 
   useEffect(() => {
     return () => savePostIds(savedPostIds)
   });
 
-    const handleLikePost = async (postId) => {
-        
-        try {
-            const {data} = await savePost({
-                variables: { postId: postId, likedPost: postId},
-            });
-            setSavedPostIds([...savedPostIds, postId]);
-        } catch (err) {
-            console.error(JSON.stringify(err));
-        }
-        console.log(postId)
-    };
+  const handleLikePost = async (postId) => {
 
-    // const handleUnlike = async (postId) => {
+    try {
+      const { data } = await savePost({
+        variables: { postId: postId, likedPost: postId },
+      });
+      setSavedPostIds([...savedPostIds, postId]);
+    } catch (err) {
+      console.error(JSON.stringify(err));
+    }
+    console.log(postId)
+  };
 
-    //   try {
-    //     const {data} = await unlikePost({
-    //       variables: { likedPost: postId },
-    //     });
-    //     setSavedPostIds([...savePostIds, postId]);
-    //   } catch (err) {
-    //     console.error(JSON.stringify(err));
-    //   }
-    // };
+  // const handleUnlike = async (postId) => {
+
+  //   try {
+  //     const {data} = await unlikePost({
+  //       variables: { likedPost: postId },
+  //     });
+  //     setSavedPostIds([...savePostIds, postId]);
+  //   } catch (err) {
+  //     console.error(JSON.stringify(err));
+  //   }
+  // };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -103,7 +103,7 @@ const Discover = () => {
 
                       {/* like post button */}
                       {/* should only view when logged in! */}
-                    <Button
+                      <Button
                         disabled={savedPostIds?.some(
                           (savedPostId) => savedPostId === post._id
                         )}
