@@ -14,7 +14,7 @@ import { LIKED_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { savePostIds, getSavedPostIds } from "../utils/localStorage";
-import {Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 
 const Discover = () => {
@@ -22,36 +22,36 @@ const Discover = () => {
   const posts = data?.posts || [];
   const postId = posts._id;
 
-    const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
-    const [savePost, { error }] = useMutation(LIKED_POST);
+  const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
+  const [savePost, { error }] = useMutation(LIKED_POST);
 
-    useEffect(() => {
-        return ()=> savePostIds(savedPostIds)
-    });
+  useEffect(() => {
+    return () => savePostIds(savedPostIds)
+  });
 
-    const handleLikePost = async (postId) => {
-        
-        // const postToLike = posts.find((post) => post._id === postId);
-        // const { key, value } = event.target;
-        // setSavedPostIds( {...savedPostIds, [key]: value})
+  const handleLikePost = async (postId) => {
 
-        // const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // const postToLike = posts.find((post) => post._id === postId);
+    // const { key, value } = event.target;
+    // setSavedPostIds( {...savedPostIds, [key]: value})
 
-        // if (!token) {
-        //     return false;
-        // }
+    // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        // error on click says "cannot query username on type post"
-        try {
-            const {data} = await savePost({
-                variables: { postId: postId},
-            });
-            setSavedPostIds([...savedPostIds, postId]);
-        } catch (err) {
-            console.error(JSON.stringify(err));
-        }
-        console.log(postId)
-    };
+    // if (!token) {
+    //     return false;
+    // }
+
+    // error on click says "cannot query username on type post"
+    try {
+      const { data } = await savePost({
+        variables: { postId: postId },
+      });
+      setSavedPostIds([...savedPostIds, postId]);
+    } catch (err) {
+      console.error(JSON.stringify(err));
+    }
+    console.log(postId)
+  };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -120,7 +120,7 @@ const Discover = () => {
                           <Accordion.Header>Comment</Accordion.Header>
                           <Accordion.Body>
                             <Commentlist />
-                            <Commentform />
+                            <Commentform postId={post._id} />
                           </Accordion.Body>
                         </Accordion.Item>
                       </Accordion>
