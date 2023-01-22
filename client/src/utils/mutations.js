@@ -83,18 +83,6 @@ export const REMOVE_COMMENT = gql`
 `;
 
 // LIKED_POST will execute the likePost mutation.
-<<<<<<< HEAD
-export const LIKE_POST = gql`
-  mutation saveLike($newLike: likedPost!) {
-    saveLike(newLike: $newLike) {
-      _id
-      username
-      likedPost {
-        _id
-        postText
-        postAuthor
-        postImage
-=======
 export const LIKED_POST = gql`
   mutation likedPost($postId:ID!) {
     likedPost(postId: $postId) {
@@ -107,7 +95,6 @@ export const LIKED_POST = gql`
       likedBy
       createdAt
       comments
->>>>>>> 21f47144b67cb7263a6643784e12b332f8032a3c
       }
     }
   }

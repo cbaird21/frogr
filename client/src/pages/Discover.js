@@ -6,13 +6,51 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/commentForm/index"
-import Commentlist from "../components/commentList/index";
+import Commentform from "../components/CommentForm/index"
+import Commentlist from "../components/CommentList/index";
+
+import { useState, useEffect } from "react";
+import { LIKED_POST } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { savePostIds, getSavedPostIds } from "../utils/localStorage";
+import {Button} from "react-bootstrap";
 
 
 const Discover = () => {
   const { loading, data } = useQuery(GET_POST);
   const posts = data?.posts || [];
+  const postId = posts._id;
+
+    const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
+    const [savePost, { error }] = useMutation(LIKED_POST);
+
+    useEffect(() => {
+        return ()=> savePostIds(savedPostIds)
+    });
+
+    const handleLikePost = async (postId) => {
+        
+        const postToLike = posts.find((post) => post._id === postId);
+        // const { key, value } = event.target;
+        // setSavedPostIds( {...savedPostIds, [key]: value})
+
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const {data} = await savePost({
+                variables: { postId: postToLike},
+            });
+            setSavedPostIds([...savedPostIds, postToLike.postId]);
+        } catch (err) {
+            console.error(err);
+        }
+        console.log(postId)
+    };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -31,20 +69,47 @@ const Discover = () => {
             <Masonry>
               {posts.map((post) => {
                 return (
-                  <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
+                  <Card
+                    key={post._id}
+                    className="m-3"
+                    style={{ width: "18rem" }}
+                  >
                     <CardHeader className="lightergrey">
-                      {post.profilePic ? (<Card.Img
-                        style={{ width: "18rem" }}
-                        src={post.profilePic}
-                        alt="profile pic"
-                      ></Card.Img>) : ""}
+                      {post.profilePic ? (
+                        <Card.Img
+                          style={{ width: "18rem" }}
+                          src={post.profilePic}
+                          alt="profile pic"
+                        ></Card.Img>
+                      ) : (
+                        ""
+                      )}
                       <h3>{post.postAuthor}</h3>
                     </CardHeader>
                     <Card.Body>
-                      {post.postImage ? (<Card.Img src={post.postImage} alt="post image"></Card.Img>) : ""}
+                      {post.postImage ? (
+                        <Card.Img
+                          src={post.postImage}
+                          alt="post image"
+                        ></Card.Img>
+                      ) : (
+                        ""
+                      )}
                       <Card.Text>{post.postText}</Card.Text>
-                      <button className="like-btn">Like Post</button>
-                    <small className="text-muted ml-2">
+                      <Button
+                        disabled={savedPostIds?.some(
+                          (savedPostId) => savedPostId === postId
+                        )}
+                        className="btn-block btn-info"
+                        onClick={() => handleLikePost(post.postId)}
+                      >
+                        {savedPostIds?.some(
+                          (savedPostId) => savedPostId === postId
+                        )
+                          ? "Liked!"
+                          : "Like Post"}
+                      </Button>
+                      <small className="text-muted ml-2">
                         created at: {post.createdAt}
                       </small>
                     </Card.Body>
@@ -66,8 +131,8 @@ const Discover = () => {
           </ResponsiveMasonry>
         </main>
         <aside className="col-3">
-          <Card className="w-100 h-100  d-inline-block grey">
-            <Card.Header className="p-4 m-0  border-bottom">
+          <Card className="w-100 h-100  d-inline-block">
+            <Card.Header className="p-4 m-0  border-bottom grey">
               <h2>Discover different ideas!</h2>
             </Card.Header>
             <Card.Body>
