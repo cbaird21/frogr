@@ -1,12 +1,13 @@
 import React from "react";
-import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Accordion from 'react-bootstrap/Accordion';
 
 import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-
+import Commentform from "../components/commentForm/index"
+import Commentlist from "../components/commentList/index";
 
 
 const Discover = () => {
@@ -23,44 +24,53 @@ const Discover = () => {
     <>
       <Container fluid className="row vh-100 mb-2">
         <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
-        <h1>Hop around and find out</h1>
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
-        >
-          <Masonry> 
-            {posts.map((post) => {
-              return (
-                <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
-                  <CardHeader className="lightergrey">
-                    {post.profilePic ? (<Card.Img
-                      style={{ width: "18rem" }}
-                      src={post.profilePic}
-                      alt="profile pic"
+          <h1>Hop around and find out</h1>
+          <ResponsiveMasonry
+            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          >
+            <Masonry>
+              {posts.map((post) => {
+                return (
+                  <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
+                    <CardHeader className="lightergrey">
+                      {post.profilePic ? (<Card.Img
+                        style={{ width: "18rem" }}
+                        src={post.profilePic}
+                        alt="profile pic"
                       ></Card.Img>) : ""}
-                    <h3>{post.postAuthor}</h3>
-                  </CardHeader>
-                  <Card.Body>
-                    {post.postImage ? (<Card.Img src={post.postImage} alt="post image"></Card.Img>) : ""}
-                    <Card.Text>{post.postText}</Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <button className="like-btn">Like Post</button>
+                      <h3>{post.postAuthor}</h3>
+                    </CardHeader>
+                    <Card.Body>
+                      {post.postImage ? (<Card.Img src={post.postImage} alt="post image"></Card.Img>) : ""}
+                      <Card.Text>{post.postText}</Card.Text>
+                      <button className="like-btn">Like Post</button>
                     <small className="text-muted ml-2">
-                      created at: {post.createdAt}
-                    </small>
-                  </Card.Footer>
-                </Card>
-              );
-            })}
-          </Masonry>
-        </ResponsiveMasonry>
-          </main>             
-      <aside className="col-3">    
-        <Card className="w-100 h-100  d-inline-block grey">
-          <Card.Header className="p-4 m-0  border-bottom">
-            <h2>Discover different ideas!</h2>
-          </Card.Header>
-          <Card.Body>
+                        created at: {post.createdAt}
+                      </small>
+                    </Card.Body>
+                    <Card.Footer>
+                      <Accordion defaultActiveKey="null" flush>
+                        <Accordion.Item eventKey="1">
+                          <Accordion.Header>Comment</Accordion.Header>
+                          <Accordion.Body>
+                            <Commentlist />
+                            <Commentform />
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </Card.Footer>
+                  </Card>
+                );
+              })}
+            </Masonry>
+          </ResponsiveMasonry>
+        </main>
+        <aside className="col-3">
+          <Card className="w-100 h-100  d-inline-block grey">
+            <Card.Header className="p-4 m-0  border-bottom">
+              <h2>Discover different ideas!</h2>
+            </Card.Header>
+            <Card.Body>
               {/* search form  */}
               {/* <Form onSubmit={handleFormSubmit}>
                 <Form.Row>
@@ -81,9 +91,9 @@ const Discover = () => {
                 </Col>
                 </Form.Row>
               </Form> */}
-          </Card.Body>
-        </Card>
-      </aside>
+            </Card.Body>
+          </Card>
+        </aside>
       </Container>
     </>
   );
