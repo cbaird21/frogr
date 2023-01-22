@@ -22,8 +22,10 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('posts').populate('likedPost');
-
+        return User.findOne({ _id: context.user._id }).populate([
+          { path: "posts" },
+          { path: "likedPost" },
+        ]);
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -58,9 +60,9 @@ const resolvers = {
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { likedPosts: postId } }
+            { $addToSet: { likedPost: postId } }
           );
-          return post.populate("likedBy");
+          return (post.populate("likedBy"), user.populate("likedPost"));
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -74,9 +76,9 @@ const resolvers = {
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { likedPosts: postId } }
+            { $pull: { likedPost: postId } }
           );
-          return post.populate("likedBy");
+          return (post.populate("likedBy"), user.populate("likedPost"));
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -111,7 +113,8 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { posts: post._id } }
+          { $addToSet: { posts: post._id } },
+          { new: true }
         );
 
         return post;
@@ -127,7 +130,8 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { posts: post._id } }
+          { $pull: { posts: post._id } },
+          { new: true }
         );
 
         return post;

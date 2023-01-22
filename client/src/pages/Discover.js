@@ -6,8 +6,8 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/CommentForm/index"
-import Commentlist from "../components/CommentList/index";
+import Commentform from "../components/commentForm/index"
+import Commentlist from "../components/commentList/index";
 
 import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
@@ -29,29 +29,18 @@ const Discover = () => {
     return () => savePostIds(savedPostIds)
   });
 
-  const handleLikePost = async (postId) => {
-
-    // const postToLike = posts.find((post) => post._id === postId);
-    // const { key, value } = event.target;
-    // setSavedPostIds( {...savedPostIds, [key]: value})
-
-    // const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    // if (!token) {
-    //     return false;
-    // }
-
-    // error on click says "cannot query username on type post"
-    try {
-      const { data } = await savePost({
-        variables: { postId: postId },
-      });
-      setSavedPostIds([...savedPostIds, postId]);
-    } catch (err) {
-      console.error(JSON.stringify(err));
-    }
-    console.log(postId)
-  };
+    const handleLikePost = async (postId) => {
+        
+        try {
+            const {data} = await savePost({
+                variables: { postId: postId},
+            });
+            setSavedPostIds([...savedPostIds, postId]);
+        } catch (err) {
+            console.error(JSON.stringify(err));
+        }
+        console.log(postId)
+    };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -71,7 +60,7 @@ const Discover = () => {
               {posts.map((post) => {
                 return (
                   <Card
-                    key={post._id}
+                    key={post.postid}
                     className="m-3"
                     style={{ width: "18rem" }}
                   >
@@ -97,6 +86,9 @@ const Discover = () => {
                         ""
                       )}
                       <Card.Text>{post.postText}</Card.Text>
+
+                      {/* like post button */}
+                      {/* should only view when logged in! */}
                       <Button
                         disabled={savedPostIds?.some(
                           (savedPostId) => savedPostId === post._id
@@ -110,6 +102,7 @@ const Discover = () => {
                           ? "Liked!"
                           : "Like Post"}
                       </Button>
+
                       <small className="text-muted ml-2">
                         created at: {post.createdAt}
                       </small>
@@ -117,7 +110,7 @@ const Discover = () => {
                     <Card.Footer>
                       <Accordion defaultActiveKey="null" flush>
                         <Accordion.Item eventKey="1">
-                          <Accordion.Header>Comment</Accordion.Header>
+                          <Accordion.Header className="width-15">Comment</Accordion.Header>
                           <Accordion.Body>
                             <Commentlist />
                             <Commentform postId={post._id} />

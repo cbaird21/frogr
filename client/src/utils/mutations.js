@@ -43,12 +43,6 @@ export const REMOVE_POST = gql`
     removePost(postId: $postId ) {
       _id
       postAuthor
-      likedPost {
-        postImage
-        postText
-        postAuthor
-        createdAt
-      }
     }
   }
 `;

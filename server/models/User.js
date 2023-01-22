@@ -25,7 +25,7 @@ const userSchema = new Schema(
       trim: true,
     },
     // thoughts references the thoughtsSchema for all of a users' thoughts
-    likedPosts: [
+    likedPost: [
       {
         type: Schema.Types.ObjectId,
         ref: "Post",
