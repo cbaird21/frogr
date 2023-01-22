@@ -15,6 +15,23 @@ export const GET_ME = gql`
         postAuthor
         postImage
         createdAt
+        comments{
+          commentAuthor
+          commentText
+          createdAt
+        }
+      }
+      likedPost{
+        _id
+        postText
+        postAuthor
+        postImage
+        createdAt
+        comments{
+          commentAuthor
+          commentText
+          createdAt
+        }
       }
     }
   }

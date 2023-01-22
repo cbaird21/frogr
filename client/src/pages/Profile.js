@@ -3,7 +3,7 @@ import { AdvancedImage } from '@cloudinary/react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 
 //import React/bootstrap
-import { Card, Container } from 'react-bootstrap';
+import { Card, Container, Button } from 'react-bootstrap';
 
 //import PostForm
 import Postform from '../components/PostForm'
@@ -17,23 +17,25 @@ const Profile = () => {
     const { loading, error, data } = useQuery(GET_ME); // logged in user
     const [removePost] = useMutation(REMOVE_POST);
     const userData = data?.me || {};
-    console.log(userData);
     
-    const handleDeletePost = async (postId) => {
+    const handleRemovePost = async (postId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
+        console.log(token)
+        console.log(userData)
 
         if (!token) {
+            console.log("not logged in!!")
             return false;
             }
 
             try {
-            const { data } = await removePost({
-                variables: { postId },
-            });
-
+            console.log("logged in, attempting to remove post ...")
+            const { data } = await removePost(postId);
+            console.log(data)
             removePostId(postId);
+
             } catch (err) {
-            console.error(err);
+            console.log(JSON.stringify(err));
             }
         };
     
@@ -43,8 +45,7 @@ const Profile = () => {
     if (error) {
         return <p>Error!</p>
     }
-    console.log(data);
-    console.log(error);
+    // console.log(error);
 
     // Render the transformed image in a React component.
     return (
@@ -70,11 +71,16 @@ const Profile = () => {
                                                     <Card.Text>
                                                         {post.postText}
                                                     </Card.Text>
-                                                    
+                                                    {/* remove post button */}
+                                                    <Button
+                                                        className="btn-block btn-danger"
+                                                        onClick={() => handleRemovePost(post._id)}
+                                                    >
+                                                        Delete this post!
+                                                    </Button>
+                                                    <small className="text-muted ms-auto"> {post.createdAt}</small>
                                                 </Card.Body>
                                                 <Card.Footer>
-                                                    <img alt="removeIcon" src="/images/icons8-trash-25.png" className="p-2 ms-auto" ></img>
-                                                    <small className="text-muted ms-auto"> {post.createdAt}</small>
                                                 </Card.Footer>
                                             </Card>
                                             )
