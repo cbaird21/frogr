@@ -5,7 +5,7 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate([{ path: "posts" }, { path: "likedPosts" }]);
+      return User.find().populate([{ path: "posts" }, { path: "likedPost" }]);
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate([
@@ -24,7 +24,7 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate([
           { path: "posts" },
-          { path: "likedPosts" },
+          { path: "likedPost" },
         ]);
       }
       throw new AuthenticationError("You need to be logged in!");
@@ -60,9 +60,9 @@ const resolvers = {
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: { likedPosts: postId } }
+            { $addToSet: { likedPost: postId } }
           );
-          return post.populate("likedBy");
+          return (post.populate("likedBy"), user.populate("likedPost"));
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -76,9 +76,9 @@ const resolvers = {
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { likedPosts: postId } }
+            { $pull: { likedPost: postId } }
           );
-          return post.populate("likedBy");
+          return (post.populate("likedBy"), user.populate("likedPost"));
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -122,16 +122,15 @@ const resolvers = {
     },
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
-        const post = await Post.findOneAndDelete({
-          _id: postId,
-          postAuthor: context.user.username,
-        });
-
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $pull: { posts: post._id } }
-        );
-
+        const post = await context.user.posts.findOneAndDelete(
+          {_id: postId},
+          {$pull : 
+            {
+              posts: { _id: postId},
+            },
+          },
+          {new: true},
+          );
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");
