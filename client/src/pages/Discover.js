@@ -18,6 +18,7 @@ const Discover = () => {
     return <div>Loading...</div>;
   }
   console.log(posts);
+
   return (
     <>
       <Container fluid className="row vh-100 mb-2">
@@ -30,20 +31,21 @@ const Discover = () => {
             {posts.map((post) => {
               return (
                 <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
-                  <CardHeader>
-                    <Card.Img
+                  <CardHeader className="lightergrey">
+                    {post.profilePic ? (<Card.Img
                       style={{ width: "18rem" }}
                       src={post.profilePic}
                       alt="profile pic"
-                      ></Card.Img>
+                      ></Card.Img>) : ""}
                     <h3>{post.postAuthor}</h3>
                   </CardHeader>
                   <Card.Body>
-                    <Card.Img src={post.postImage} alt="post image"></Card.Img>
+                    {post.postImage ? (<Card.Img src={post.postImage} alt="post image"></Card.Img>) : ""}
                     <Card.Text>{post.postText}</Card.Text>
                   </Card.Body>
                   <Card.Footer>
-                    <small className="text-muted">
+                    <button className="like-btn">Like Post</button>
+                    <small className="text-muted ml-2">
                       created at: {post.createdAt}
                     </small>
                   </Card.Footer>
@@ -54,7 +56,7 @@ const Discover = () => {
         </ResponsiveMasonry>
           </main>             
       <aside className="col-3">    
-        <Card bg="secondary" className="w-100 h-100  d-inline-block">
+        <Card className="w-100 h-100  d-inline-block grey">
           <Card.Header className="p-4 m-0  border-bottom">
             <h2>Discover different ideas!</h2>
           </Card.Header>

@@ -6,7 +6,7 @@ const Footer = () => {
     const location = useLocation();
     const navigate = useNavigate();
     return (
-      <footer className="w-100 mt-auto bg-secondary p-4 ">
+      <footer className="w-100 mt-auto p-4 ">
         <div className="container text-center mb-5">
           {location.pathname !== "/" && (
             <button className="btn btn-dark mb-3" onClick={() => navigate(-1)}>
@@ -16,7 +16,7 @@ const Footer = () => {
           <ul className="nav justify-content-center">
             <li className="nav-item">
               <a
-                className="nav-link active"
+                className="nav-link green"
                 aria-current="page"
                 href="https://github.com/jennnmarshall"
                 target="blank"
@@ -27,7 +27,7 @@ const Footer = () => {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className="nav-link green"
                 href="https://github.com/cbaird21"
                 target="blank"
               >
@@ -37,7 +37,7 @@ const Footer = () => {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className="nav-link green"
                 href="https://github.com/mgetz34"
                 target="blank"
               >
@@ -47,7 +47,7 @@ const Footer = () => {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className="nav-link green"
                 href="https://github.com/GarrettA01"
                 target="blank"
               >
@@ -57,7 +57,7 @@ const Footer = () => {
             </li>
             <li className="nav-item">
               <a
-                className="nav-link"
+                className="nav-link green"
                 href="https://github.com/andylaborde"
                 target="blank"
               >
