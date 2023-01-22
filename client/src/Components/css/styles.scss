@@ -1,15 +1,37 @@
 @import "~bootstrap/scss/bootstrap";
 
-header {
-    height: 20vh;
-    background-image: url('../images/frogbanner.png');
-}
+$dark-grey: #444545;
+$lighter-grey: #C1C2C2;
+$lime-green: #B5F44A;
+$light-blue: #EFF9FA;
+$soft-green: #61772C;
 
-.CardImg {
-    size: cover;
+nav {
+    background-image: url('../images/frognav.png');
+    background-size: cover;
 }
 
 footer {
     margin-top: 10vh;
     height: 10vh;
+    background-color: $dark-grey;
+
+    .green {
+        color: $lime-green;
+    }
+}
+
+.grey {
+    background-color: $dark-grey;
+    color: $lime-green;
+}
+
+.lightergrey {
+    background-color: $lighter-grey;
+    color: $soft-green
+
+}
+
+.white {
+    color: white;
 }
