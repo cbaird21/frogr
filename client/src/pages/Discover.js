@@ -29,18 +29,18 @@ const Discover = () => {
     return () => savePostIds(savedPostIds)
   });
 
-    const handleLikePost = async (postId) => {
-        
-        try {
-            const {data} = await savePost({
-                variables: { postId: postId},
-            });
-            setSavedPostIds([...savedPostIds, postId]);
-        } catch (err) {
-            console.error(JSON.stringify(err));
-        }
-        console.log(postId)
-    };
+  const handleLikePost = async (postId) => {
+
+    try {
+      const { data } = await savePost({
+        variables: { postId: postId },
+      });
+      setSavedPostIds([...savedPostIds, postId]);
+    } catch (err) {
+      console.error(JSON.stringify(err));
+    }
+    console.log(postId)
+  };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -112,7 +112,23 @@ const Discover = () => {
                         <Accordion.Item eventKey="1">
                           <Accordion.Header className="width-15">Comment</Accordion.Header>
                           <Accordion.Body>
-                            <Commentlist />
+                            {post.comments.map((comment) => {
+                              return (
+                                <>
+                                  <div key={comment._id} className="col-12 mb-3 pb-3">
+                                    <div className="p-3 bg-dark text-light">
+                                      <h5 className="card-header">
+                                        {comment.commentAuthor} commented{' '}
+                                        <span style={{ fontSize: '0.825rem' }}>
+                                          on {comment.createdAt}
+                                        </span>
+                                      </h5>
+                                      <p className="card-body">{comment.commentText}</p>
+                                    </div>
+                                  </div>
+                                </>
+                              )
+                            })}
                             <Commentform postId={post._id} />
                           </Accordion.Body>
                         </Accordion.Item>
