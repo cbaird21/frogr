@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Container,
     Card,
@@ -8,21 +8,33 @@ import Auth from "../utils/auth";
 import { removePostId } from "../utils/localStorage";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
-import { REMOVE_POST } from "../utils/mutations";
+import { REMOVE_POST, LIKED_POST, UNLIKE_POST } from "../utils/mutations";
 
 const LikedPost = ()  => {
+    const [post, setPost] = useState({});
+    const [liked, setLikedPost] = useState(false);
+
     const { loading, data, } = useQuery(GET_ME);
     const [removePost, { error }] = useMutation(REMOVE_POST);
+    const [likedPost, {error}] = useMutation(LIKED_POST)
     const userData = data?.me || {};
     console.log(userData.likedPost);
 
+
     // create function that accepts the post's mongo _id value as param and deletes the post from the database
-    const handleDeletePost = async (postId) => {
+    const handleLike = async (postId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        if (!token) {
-            return false;
+        if (liked) {
+            // remove the like
+            const updatedPost = await unlikePost(postId)
+            setPost(updatedPost);
+        } else {
+            // add the like
+            const updatedPost = await likedPost(postId);
+            setPost(updatedPost);
         }
+        setLikedPost(!liked)
 
         try {
             const { data } = await removePost({
@@ -77,9 +89,9 @@ const LikedPost = ()  => {
                                     
                                     <Button
                                         className="btn-block btn-danger"
-                                        onClick={() => handleDeletePost(post.postId)}
+                                        onClick={handleLike}
                                     >
-                                        Delete this post!
+                                        {liked ? "Unlike" : "Like"}
                                     </Button>
                                 </Card.Body>
                                 <Card.Footer>

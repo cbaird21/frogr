@@ -87,6 +87,18 @@ export const LIKED_POST = gql`
     }
   }
 `;
+
+export const REMOVE_LIKE= gql`
+  mutation unlikePost($postId: ID!){
+    unlikePost(postId: $postId){
+      _id
+      postImage
+      postText
+    }
+  }
+
+;`
+
 export const ADD_PROFILE = gql`
   mutation addProfile($name: String!) {
     addProfile(name: $name) {
