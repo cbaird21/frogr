@@ -62,7 +62,23 @@ const resolvers = {
             { _id: context.user._id },
             { $addToSet: { likedPosts: postId } }
           );
-          return { post, user };
+          return post.populate("likedBy");
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      }
+    },
+    unlikePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const post = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $pull: { likedBy: context.user._id } }
+        );
+        if (context.user) {
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { likedPosts: postId } }
+          );
+          return post.populate("likedBy");
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -124,7 +140,7 @@ const resolvers = {
     },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        return Post.findOneAndUpdate(
+        const post = await Post.findOneAndUpdate(
           { _id: postId },
           {
             $addToSet: {
@@ -136,6 +152,7 @@ const resolvers = {
             runValidators: true,
           }
         );
+        return post.save();
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -156,6 +173,17 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    // saveLike: async (parent, { newLike }, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { likedPosts: newLike } },
+    //       { new: true }
+    //     );
+    //     return updatedUser;
+    //   }
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
   },
 };
 
