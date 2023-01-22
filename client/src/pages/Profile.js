@@ -62,8 +62,8 @@ const Profile = () => {
                                 userData.posts.map((post) => {
                                     return(
                                         <Card key={post._id} className='m-3' style={{ width: '18rem' }}>
-                                            <Card.Header>
-                                                <Card.Img alt="profile pic"></Card.Img><h3>{post.postAuthor}</h3>
+                                            <Card.Header className='lightergrey'>
+                                                {post.userPic ? (<Card.Img alt="profile pic"></Card.Img>) : ""}<h3>{post.postAuthor}</h3>
                                                 </Card.Header>
                                                 <Card.Body>
                                                     <Card.Img src={post.postImage}></Card.Img>
@@ -85,9 +85,9 @@ const Profile = () => {
                                 </div>
                             </main>
                             <aside className="col-3">    
-                                <Card bg="secondary" className="w-100 h-100  d-inline-block">
-                                    <Card.Header className="p-4 m-0  border-bottom">
-                                        <AdvancedImage className="p-2" cldImg={userData.userPic} />
+                                <Card className="w-100 h-100  d-inline-block">
+                                    <Card.Header className="p-4 m-0  border-bottom grey">
+                                        {userData.userPic ? (<Card.Img className="p-2" cldImg={userData.userPic}></Card.Img>) : ""}
                                         <h2 className="p-2 d-inline">{userData.username}</h2>
                                         <p className="p-2">{`${userData.posts.length}`} Posts </p>
                                     </Card.Header>
