@@ -71,12 +71,14 @@ const resolvers = {
       if (context.user) {
         const post = await Post.findOneAndUpdate(
           { _id: postId },
-          { $pull: { likedBy: context.user._id } }
+          { $pull: { likedBy: context.user._id } },
+          { new: true }
         );
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { likedPost: postId } }
+            { $pull: { likedPost: postId } },
+            { new: true }
           );
           return post.populate("likedBy"), user.populate("likedPost");
         }
