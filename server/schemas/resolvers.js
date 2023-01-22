@@ -5,23 +5,27 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find().populate("posts").populate("likedPosts");
+      return User.find().populate([{ path: "posts" }, { path: "likedPosts" }]);
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username })
-        .populate("posts")
-        .populate("likedPosts");
+      return User.findOne({ username }).populate([
+        { path: "posts" },
+        { path: "likedPosts" },
+      ]);
     },
     posts: async (parent, { postAuthor }) => {
       const params = postAuthor ? { postAuthor } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 }).populate("likedBy");
     },
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId });
+      return Post.findOne({ _id: postId }).populate("likedBy");
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts").populate('likedPosts');
+        return User.findOne({ _id: context.user._id }).populate([
+          { path: "posts" },
+          { path: "likedPosts" },
+        ]);
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -46,6 +50,38 @@ const resolvers = {
         return { token, user };
       }
       throw new AuthenticationError("You need to be logged in!");
+    },
+    likedPost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const post = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $addToSet: { likedBy: context.user._id } }
+        );
+        if (context.user) {
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { likedPosts: postId } }
+          );
+          return post.populate("likedBy");
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      }
+    },
+    unlikePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const post = await Post.findOneAndUpdate(
+          { _id: postId },
+          { $pull: { likedBy: context.user._id } }
+        );
+        if (context.user) {
+          const user = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $pull: { likedPosts: postId } }
+          );
+          return post.populate("likedBy");
+        }
+        throw new AuthenticationError("You need to be logged in!");
+      }
     },
     removeUser: (parent, { userId }) => {
       return User.findOneAndDelete({ _id: userId });
@@ -102,7 +138,7 @@ const resolvers = {
     },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        return Post.findOneAndUpdate(
+        const post = await Post.findOneAndUpdate(
           { _id: postId },
           {
             $addToSet: {
@@ -114,6 +150,7 @@ const resolvers = {
             runValidators: true,
           }
         );
+        return post.save();
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -134,6 +171,17 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    // saveLike: async (parent, { newLike }, context) => {
+    //   if (context.user) {
+    //     const updatedUser = await User.findByIdAndUpdate(
+    //       { _id: context.user._id },
+    //       { $push: { likedPosts: newLike } },
+    //       { new: true }
+    //     );
+    //     return updatedUser;
+    //   }
+    //   throw new AuthenticationError("You need to be logged in!");
+    // },
   },
 };
 
