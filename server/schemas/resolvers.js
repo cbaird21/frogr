@@ -62,7 +62,7 @@ const resolvers = {
             { _id: context.user._id },
             { $addToSet: { likedPost: postId } }
           );
-          return (post.populate("likedBy"), user.populate("likedPost"));
+          return post.populate("likedBy"), user.populate("likedPost");
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -80,13 +80,17 @@ const resolvers = {
             { $pull: { likedPost: postId } },
             { new: true }
           );
-          return (post.populate("likedBy"), user.populate("likedPost"));
+          return post.populate("likedBy"), user.populate("likedPost");
         }
         throw new AuthenticationError("You need to be logged in!");
       }
     },
-    removeUser: (parent, { userId }) => {
-      return User.findOneAndDelete({ _id: userId });
+    removeUser: async (parent, { userId }, context) => {
+      if (context.user) {
+        const user = User.findOneAndDelete({ _id: userId });
+        return user;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -125,15 +129,11 @@ const resolvers = {
     },
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
-        const post = await Post.findOneAndDelete({
-          _id: postId,
-          postAuthor: context.user.username,
-        });
+        const post = await Post.findOneAndDelete({ _id: postId });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { posts: post._id } },
-          { new: true }
+          { $pull: { posts: postId } }
         );
 
         return post;
