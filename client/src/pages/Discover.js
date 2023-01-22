@@ -1,12 +1,12 @@
 import React from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import Accordion from 'react-bootstrap/Accordion';
+import Accordion from "react-bootstrap/Accordion";
 
 import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/CommentForm"
+import Commentform from "../components/CommentForm";
 import Commentlist from "../components/CommentList";
 
 import { useState, useEffect } from "react";
@@ -15,46 +15,44 @@ import { LIKED_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { savePostIds, getSavedPostIds } from "../utils/localStorage";
-import {Button} from "react-bootstrap";
-
+import { Button } from "react-bootstrap";
 
 const Discover = () => {
   const { loading, data } = useQuery(GET_POST);
   const posts = data?.posts || [];
   const postId = posts._id;
 
-    const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
-    const [savePost, { error }] = useMutation(LIKED_POST);
-    // const [unlikePost, {error1}] = useMutation(UNLIKE_POST);
+  const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
+  const [savePost, { error }] = useMutation(LIKED_POST);
+  // const [unlikePost, {error1}] = useMutation(UNLIKE_POST);
 
-    useEffect(() => {
-        return ()=> savePostIds(savedPostIds)
-    });
+  useEffect(() => {
+    return () => savePostIds(savedPostIds);
+  });
 
-    const handleLikePost = async (postId) => {
-        
-        try {
-            const {data} = await savePost({
-                variables: { postId: postId, likedPost: postId},
-            });
-            setSavedPostIds([...savedPostIds, postId]);
-        } catch (err) {
-            console.error(JSON.stringify(err));
-        }
-        console.log(postId)
-    };
+  const handleLikePost = async (postId) => {
+    try {
+      const { data } = await savePost({
+        variables: { postId: postId, likedPost: postId },
+      });
+      setSavedPostIds([...savedPostIds, postId]);
+    } catch (err) {
+      console.error(JSON.stringify(err));
+    }
+    console.log(postId);
+  };
 
-    // const handleUnlike = async (postId) => {
+  // const handleUnlike = async (postId) => {
 
-    //   try {
-    //     const {data} = await unlikePost({
-    //       variables: { likedPost: postId },
-    //     });
-    //     setSavedPostIds([...savePostIds, postId]);
-    //   } catch (err) {
-    //     console.error(JSON.stringify(err));
-    //   }
-    // };
+  //   try {
+  //     const {data} = await unlikePost({
+  //       variables: { likedPost: postId },
+  //     });
+  //     setSavedPostIds([...savePostIds, postId]);
+  //   } catch (err) {
+  //     console.error(JSON.stringify(err));
+  //   }
+  // };
   // Render the image in a React component.
   // loading
   if (loading) {
@@ -103,7 +101,7 @@ const Discover = () => {
 
                       {/* like post button */}
                       {/* should only view when logged in! */}
-                    <Button
+                      <Button
                         disabled={savedPostIds?.some(
                           (savedPostId) => savedPostId === post._id
                         )}
@@ -124,24 +122,31 @@ const Discover = () => {
                     <Card.Footer>
                       <Accordion defaultActiveKey="null" flush>
                         <Accordion.Item eventKey="1">
-                          <Accordion.Header className="width-15">Comment</Accordion.Header>
+                          <Accordion.Header className="width-15">
+                            Comment
+                          </Accordion.Header>
                           <Accordion.Body>
                             {post.comments.map((comment) => {
-                              return(
+                              return (
                                 <>
-                                <div key={comment._id} className="col-12 mb-3 pb-3">
+                                  <div
+                                    key={comment._id}
+                                    className="col-12 mb-3 pb-3"
+                                  >
                                     <div className="p-3 bg-dark text-light">
-                                        <h5 className="card-header">
-                                            {comment.commentAuthor} commented{' '}
-                                            <span style={{ fontSize: '0.825rem' }}>
-                                                on {comment.createdAt}
-                                            </span>
-                                        </h5>
-                                        <p className="card-body">{comment.commentText}</p>
+                                      <h5 className="card-header">
+                                        {comment.commentAuthor} commented{" "}
+                                        <span style={{ fontSize: "0.825rem" }}>
+                                          on {comment.createdAt}
+                                        </span>
+                                      </h5>
+                                      <p className="card-body">
+                                        {comment.commentText}
+                                      </p>
                                     </div>
-                                </div>
+                                  </div>
                                 </>
-                              )
+                              );
                             })}
                             <Commentform postId={post._id} />
                           </Accordion.Body>
@@ -187,5 +192,7 @@ const Discover = () => {
     </>
   );
 };
+
+//export
 
 export default Discover;
