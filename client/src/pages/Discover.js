@@ -7,14 +7,14 @@ import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
 import Commentform from "../components/CommentForm";
-import Commentlist from "../components/CommentList";
+import { REMOVE_COMMENT } from "../utils/mutations";
 
 import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
 // import { UNLIKE_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import { savePostIds, getSavedPostIds } from "../utils/localStorage";
+import { savePostIds, getSavedPostIds, removePostId } from "../utils/localStorage";
 import { Button } from "react-bootstrap";
 
 const Discover = () => {
@@ -24,7 +24,7 @@ const Discover = () => {
 
   const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
   const [savePost, { error }] = useMutation(LIKED_POST);
-  // const [unlikePost, {error1}] = useMutation(UNLIKE_POST);
+  const [removeComment, { error1 }] = useMutation(REMOVE_COMMENT);
 
   useEffect(() => {
     return () => savePostIds(savedPostIds);
@@ -40,6 +40,16 @@ const Discover = () => {
       console.error(JSON.stringify(err));
     }
     console.log(postId);
+  };
+
+  const handleRemoveComment = async (postId, commentId) => {
+    try {
+      const { data } = await removeComment({
+        variables: { postId: postId, commentId: commentId, commentAuthor: posts.comments.commentAuthor},
+      });
+    } catch (err) {
+      console.error(JSON.stringify(error));
+    }
   };
 
   // const handleUnlike = async (postId) => {
@@ -71,11 +81,7 @@ const Discover = () => {
             <Masonry>
               {posts.map((post) => {
                 return (
-                  <Card
-                    key={post._id}
-                    className="m-3"
-                    style={{ width: "18rem" }}
-                  >
+                  <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
                     <CardHeader className="lightergrey">
                       {post.profilePic ? (
                         <Card.Img
