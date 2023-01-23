@@ -6,21 +6,20 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/commentForm";
+import Commentform from "../components/CommentForm";
 import { REMOVE_COMMENT } from "../utils/mutations";
 
 import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
 // import { UNLIKE_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import { savePostIds, getSavedPostIds, removePostId } from "../utils/localStorage";
+// import Auth from "../utils/auth";
+import { savePostIds, getSavedPostIds } from "../utils/localStorage";
 import { Button } from "react-bootstrap";
 
 const Discover = () => {
   const { loading, data } = useQuery(GET_POST);
   const posts = data?.posts || [];
-  const postId = posts._id;
 
   const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
   const [savePost, { error }] = useMutation(LIKED_POST);

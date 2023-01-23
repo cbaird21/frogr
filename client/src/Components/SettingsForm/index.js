@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 // Import the GraphQL mutation
 import { EDIT_USER } from '../../utils/mutations';
-import Auth from "../../utils/auth"
+// import Auth from "../../utils/auth"
 import {Alert, Button} from "react-bootstrap";
 
 const EditUser = () => {
@@ -19,7 +19,7 @@ const EditUser = () => {
     });
     // const [validated] = useState(false);
     // Invoke `useMutation()` hook to return a Promise-based function and data about the EDIT_USER mutation
-    const [editUser, { error, data }] = useMutation(EDIT_USER);
+    const [editUser, { error }] = useMutation(EDIT_USER);
     const [show, setShow] = useState(false);
 
     const handleInputChange = (event) => {
@@ -56,7 +56,7 @@ const EditUser = () => {
 
     return (
       <>
-        <div>
+        <div className='container'>
           <h3>Edit your username, email or password</h3>
           <Alert show={show} variant="success">
             <Alert.Heading>User details successfully changed!</Alert.Heading>
@@ -69,7 +69,7 @@ const EditUser = () => {
             </div>
           </Alert>
           <form
-            className="flex-row justify-center justify-space-between-md align-center"
+            className="flex-row justify-center justify-space-between-md align-center m-4"
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
