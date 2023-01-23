@@ -67,3 +67,4 @@ export const GET_SINGLE_POST = gql`
     }
   }
 `;
+

@@ -48,7 +48,7 @@ const typeDefs = gql`
       password: String!
       userPic: String
     ): Auth
-    editUser(username: String, password: String, userPic: String): Auth
+    editUser(username: String, email: String, password: String): Auth
     likedPost(postId: ID!): Post
     unlikePost(postId: ID!): Post
     removeUser(userId: ID!): Auth

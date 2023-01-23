@@ -37,12 +37,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    editUser: async (parent, { username, password, userPic }, context) => {
+    editUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $set: { username: username, password: password, userPic: userPic },
+            $set: { username: username, email: email, password: password },
           },
           { new: true }
         );
@@ -119,7 +119,8 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { posts: post._id } }
+          { $addToSet: { posts: post._id } },
+          { new: true }
         );
 
         return post;
@@ -141,19 +142,20 @@ const resolvers = {
     },
     addComment: async (parent, { postId, commentText }, context) => {
       if (context.user) {
-        const post = await Post.findOneAndUpdate(
-          { _id: postId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
+        try {
+          return Post.findOneAndUpdate(
+            { _id: postId },
+            {
+              $addToSet: {
+                comments: { commentText, commentAuthor: context.user.username },
+              },
             },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-        return post.save();
+            {
+              new: true,
+              runValidators: true,
+            }
+          );
+        } catch (error) { console.log(JSON.stringify(error)) }
       }
       throw new AuthenticationError("You need to be logged in!");
     },

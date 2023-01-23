@@ -52,9 +52,12 @@ export const ADD_COMMENT = gql`
   mutation addComment($postId: ID!, $commentText: String!) {
     addComment(postId: $postId, commentText: $commentText) {
       _id
+      postText
+      postAuthor
+      createdAt
       comments {
+        _id
         commentText
-        commentAuthor
         createdAt
       }
     }
@@ -108,3 +111,15 @@ export const ADD_PROFILE = gql`
     }
   }
 `;
+
+export const EDIT_USER = gql`
+mutation editUser($username:String, $email: String, $password: String) {
+  editUser(username: $username, email: $email, password: $password) {
+    user{
+      username
+      email
+      password
+    }
+  }
+}
+`
