@@ -10,7 +10,7 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate([
         { path: "posts" },
-        { path: "likedPosts" },
+        { path: "likedPost" },
       ]);
     },
     posts: async (parent, { postAuthor }) => {
@@ -37,12 +37,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    editUser: async (parent, { username, password, userPic }, context) => {
+    editUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $set: { username: username, password: password, userPic: userPic },
+            $set: { username: username, email: email, password: password },
           },
           { new: true }
         );
@@ -62,7 +62,7 @@ const resolvers = {
             { _id: context.user._id },
             { $addToSet: { likedPost: postId } }
           );
-          return (post.populate("likedBy"), user.populate("likedPost"));
+          return post.populate("likedBy"), user.populate("likedPost");
         }
         throw new AuthenticationError("You need to be logged in!");
       }
@@ -71,20 +71,26 @@ const resolvers = {
       if (context.user) {
         const post = await Post.findOneAndUpdate(
           { _id: postId },
-          { $pull: { likedBy: context.user._id } }
+          { $pull: { likedBy: context.user._id } },
+          { new: true }
         );
         if (context.user) {
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { likedPost: postId } }
+            { $pull: { likedPost: postId } },
+            { new: true }
           );
-          return (post.populate("likedBy"), user.populate("likedPost"));
+          return post.populate("likedBy"), user.populate("likedPost");
         }
         throw new AuthenticationError("You need to be logged in!");
       }
     },
-    removeUser: (parent, { userId }) => {
-      return User.findOneAndDelete({ _id: userId });
+    removeUser: async (parent, { userId }, context) => {
+      if (context.user) {
+        const user = User.findOneAndDelete({ _id: userId });
+        return user;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -122,15 +128,13 @@ const resolvers = {
     },
     removePost: async (parent, { postId }, context) => {
       if (context.user) {
-        const post = await context.user.posts.findOneAndDelete(
-          {_id: postId},
-          {$pull : 
-            {
-              posts: { _id: postId},
-            },
-          },
-          {new: true},
-          );
+        const post = await Post.findOneAndDelete({ _id: postId });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { posts: postId } }
+        );
+
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");

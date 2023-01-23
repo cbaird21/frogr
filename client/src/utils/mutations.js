@@ -66,7 +66,6 @@ export const ADD_COMMENT = gql`
 export const REMOVE_COMMENT = gql`
   mutation removeComment($postId: ID!, $commentId: ID!) {
     removeComment(postId: $postId, commentId: $commentId) {
-      _id
       comments {
         _id
         commentText
@@ -88,16 +87,17 @@ export const LIKED_POST = gql`
   }
 `;
 
-export const REMOVE_LIKE= gql`
-  mutation unlikePost($postId: ID!){
-    unlikePost(postId: $postId){
+// LIKED_POST will execute the likePost mutation.
+export const UNLIKE_POST = gql`
+  mutation unlikePost($postId:ID!) {
+    unlikePost(postId: $postId) {
       _id
       postImage
       postText
+      postAuthor
     }
   }
-
-;`
+`;
 
 export const ADD_PROFILE = gql`
   mutation addProfile($name: String!) {

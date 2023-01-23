@@ -46,7 +46,7 @@ const UploadWidget = () => {
   // const addImage = async (error, result) => {
 
   // }
-  return <button className="btn btn-outline-success" onClick={() => widgetRef.current.open()}>Upload</button>;
+  return <button className="btn btn-outline-success mb-2" onClick={() => widgetRef.current.open()}>Upload a photo</button>;
 };
 
 export default UploadWidget;
