@@ -6,7 +6,7 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/CommentForm";
+import Commentform from "../components/commentForm";
 import { REMOVE_COMMENT } from "../utils/mutations";
 
 import { useState, useEffect } from "react";
@@ -72,7 +72,7 @@ const Discover = () => {
 
   return (
     <>
-      <Container fluid className="row vh-100 mb-2">
+      <Container fluid className="row vh-100 ms-auto mb-2">
         <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
           <h1>Hop around and find out</h1>
           <ResponsiveMasonry
