@@ -83,7 +83,7 @@ const Discover = () => {
               {posts.map((post) => {
                 return (
                   <Card key={post._id} className="m-3 lightergrey" style={{ width: "18rem" }}>
-                    <CardHeader className="lightergrey">
+                    <CardHeader className="greengrey">
                       {post.profilePic ? (
                         <Card.Img
                           style={{ width: "18rem" }}

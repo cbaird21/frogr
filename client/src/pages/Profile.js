@@ -67,7 +67,7 @@ const Profile = () => {
                                         userData.posts.map((post) => {
                                             return (
                                                 <Card key={post._id} className='m-3 lightergrey' style={{ width: '18rem' }}>
-                                                    <Card.Header className='lightergrey'>
+                                                    <Card.Header className='greengrey'>
                                                         {post.userPic ? (<Card.Img alt="profile pic"></Card.Img>) : ""}<h3>{post.postAuthor}</h3>
                                                     </Card.Header>
                                                     <Card.Body>

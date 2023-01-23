@@ -83,7 +83,7 @@ const LikedPost = () => {
               {userData.likedPost.map((post) => {
                 return (
                   <Card key={post._id} className="m-3 lightergrey" style={{ width: "18rem" }}>
-                    <Card.Header className="lightergrey" ><h3>{post.postAuthor}</h3></Card.Header>
+                    <Card.Header className="greengrey" ><h3>{post.postAuthor}</h3></Card.Header>
                     <Card.Body>
                       {/* if post image exists */}
                       {post.postImage ? (
