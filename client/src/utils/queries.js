@@ -46,6 +46,7 @@ export const GET_POST = gql`
       postImage
       createdAt
       comments {
+        _id
         commentText
         commentAuthor
         createdAt

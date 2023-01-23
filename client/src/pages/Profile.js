@@ -1,11 +1,11 @@
 import React from 'react'
-import { AdvancedImage } from '@cloudinary/react';
+// import { AdvancedImage } from '@cloudinary/react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 
 //import React/bootstrap
 import { Card, Container, Button } from 'react-bootstrap';
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/commentForm";
+import Commentform from "../components/CommentForm";
 //import PostForm
 import Postform from '../components/PostForm'
 import {useQuery, useMutation} from '@apollo/client'
