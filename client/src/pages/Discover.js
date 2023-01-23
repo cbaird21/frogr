@@ -14,7 +14,7 @@ import { LIKED_POST } from "../utils/mutations";
 // import { UNLIKE_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
-import { savePostIds, getSavedPostIds } from "../utils/localStorage";
+import { savePostIds, getSavedPostIds, removePostId } from "../utils/localStorage";
 import { Button } from "react-bootstrap";
 
 const Discover = () => {
@@ -47,7 +47,6 @@ const Discover = () => {
       const { data } = await removeComment({
         variables: { postId: postId, commentId: commentId, commentAuthor: posts.comments.commentAuthor},
       });
-      
     } catch (err) {
       console.error(JSON.stringify(error));
     }

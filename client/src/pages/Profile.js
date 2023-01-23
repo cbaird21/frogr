@@ -39,6 +39,7 @@ const Profile = () => {
             } catch (err) {
             console.log(JSON.stringify(err));
             }
+            window.location.reload();
         };
     
     if (loading) {
