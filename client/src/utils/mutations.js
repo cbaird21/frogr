@@ -112,3 +112,15 @@ export const ADD_PROFILE = gql`
     }
   }
 `;
+
+export const EDIT_USER = gql`
+mutation editUser($username:String, $password: String, $username: String) {
+  editUser(username: $username, password: $password) {
+    user{
+      username
+      userPic
+      password
+    }
+  }
+}
+`
