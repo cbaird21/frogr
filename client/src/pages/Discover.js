@@ -44,7 +44,7 @@ const Discover = () => {
   const handleRemoveComment = async (postId, commentId) => {
     try {
       const { data } = await removeComment({
-        variables: { postId: postId, commentId: commentId},
+        variables: { postId: postId, commentId: commentId },
       });
       console.log(postId)
     } catch (err) {
@@ -111,20 +111,20 @@ const Discover = () => {
                       {
                         Auth.loggedIn() ? (
                           <Button
-                        disabled={savedPostIds?.some(
-                          (savedPostId) => savedPostId === post._id
-                        )}
-                        className="btn-block btn-info"
-                        onClick={() => handleLikePost(post._id)}
-                      >
-                        {savedPostIds?.some(
-                          (savedPostId) => savedPostId === post._id
-                        )
-                          ? "Liked!"
-                          : "Like Post"}
-                      </Button>
+                            disabled={savedPostIds?.some(
+                              (savedPostId) => savedPostId === post._id
+                            )}
+                            className="btn-block btn-info"
+                            onClick={() => handleLikePost(post._id)}
+                          >
+                            {savedPostIds?.some(
+                              (savedPostId) => savedPostId === post._id
+                            )
+                              ? "Liked!"
+                              : "Like Post"}
+                          </Button>
                         ) : null}
-                      
+
 
                       <small className="d-block text-muted ml-2">
                         created at: {post.createdAt}
@@ -140,7 +140,7 @@ const Discover = () => {
                             {post.comments.map((comment) => {
                               return (
                                 <>
-                                <div key={comment._id} className="col-12 mb-3 pb-3">
+                                  <div key={comment._id} className="col-12 mb-3 pb-3">
                                     <div className="p-3 bg-dark text-light">
                                       <h5 className="card-header">
                                         {comment.commentAuthor} commented{" "}
