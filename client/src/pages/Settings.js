@@ -1,4 +1,4 @@
-import EditUser from '../components/SettingsForm/index'
+import EditUser from '../components/settingsForm/index'
 
 const Settings = () => {
     return (
