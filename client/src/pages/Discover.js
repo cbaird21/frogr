@@ -77,7 +77,7 @@ const Discover = () => {
         <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
           <h1 className="green">Hop around and find out</h1>
           <ResponsiveMasonry
-            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
           >
             <Masonry>
               {posts.map((post) => {
@@ -114,7 +114,7 @@ const Discover = () => {
                             disabled={savedPostIds?.some(
                               (savedPostId) => savedPostId === post._id
                             )}
-                            className="btn-block btn-info"
+                            className="btn-block btn-success"
                             onClick={() => handleLikePost(post._id)}
                           >
                             {savedPostIds?.some(

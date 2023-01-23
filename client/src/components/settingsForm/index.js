@@ -57,7 +57,7 @@ const EditUser = () => {
     return (
       <>
         <div className='container'>
-          <h3 classname="green">Profile Settings</h3>
+          <h3 className="green">Profile Settings</h3>
           <Alert show={show} variant="success">
             <Alert.Heading>User details successfully changed!</Alert.Heading>
             <p>Good job.</p>

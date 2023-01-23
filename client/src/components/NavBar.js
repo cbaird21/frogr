@@ -24,7 +24,7 @@ const AppNavbar = () => {
 
                     <Navbar.Toggle aria-controls='navbar' />
                     <Navbar.Collapse id='navbar'>
-                        <Nav className='ms-auto'>
+                        <Nav className='ms-auto white'>
                             <Nav.Link as={Link} to='/'>
                                 Discover
                             </Nav.Link>
