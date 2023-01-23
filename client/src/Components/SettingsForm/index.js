@@ -5,9 +5,11 @@ import { useMutation } from '@apollo/client';
 import { EDIT_USER } from '../../utils/mutations';
 
 const EditUser = () => {
-    const [userName, setUserName] = useState(context.user.userName);
-    const [email, setEmail] = useState(context.user.email);
-    const [password, setPassword] = useState(context.user.password);
+    const [inputType, setInputType] = useState < string > ("")
+    const inputTypes = ["text", "radio", "checkbox", "hidden", "password"]
+    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     // Invoke `useMutation()` hook to return a Promise-based function and data about the EDIT_USER mutation
     const [editUser, { error }] = useMutation(EDIT_USER);
@@ -66,7 +68,7 @@ const EditUser = () => {
                             Save changes
                         </button>
                     </div>
-                    {error && (
+                    {console.log(JSON.stringify(error)) && (
                         <div className="col-12 my-3 bg-danger text-white p-3">
                             Something went wrong...
                         </div>

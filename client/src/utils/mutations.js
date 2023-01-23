@@ -114,11 +114,11 @@ export const ADD_PROFILE = gql`
 `;
 
 export const EDIT_USER = gql`
-mutation editUser($username:String, $password: String, $username: String) {
-  editUser(username: $username, password: $password) {
+mutation editUser($username:String, $email: String, $password: String) {
+  editUser(username: $username, email: $email, password: $password) {
     user{
       username
-      userPic
+      email
       password
     }
   }
