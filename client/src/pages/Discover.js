@@ -72,8 +72,8 @@ const Discover = () => {
 
   return (
     <>
-      <Container fluid className="row vh-100 ms-auto mb-2">
-        <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
+      <Container fluid className=" row vh-100 ms-auto mb-2">
+        <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
           <h1>Hop around and find out</h1>
           <ResponsiveMasonry
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
@@ -81,7 +81,7 @@ const Discover = () => {
             <Masonry>
               {posts.map((post) => {
                 return (
-                  <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
+                  <Card key={post._id} className="m-3 lightergrey" style={{ width: "18rem" }}>
                     <CardHeader className="lightergrey">
                       {post.profilePic ? (
                         <Card.Img
@@ -121,14 +121,14 @@ const Discover = () => {
                           : "Like Post"}
                       </Button>
 
-                      <small className="text-muted ml-2">
+                      <small className="d-block text-muted ml-2">
                         created at: {post.createdAt}
                       </small>
                     </Card.Body>
                     <Card.Footer>
                       <Accordion defaultActiveKey="null" flush>
                         <Accordion.Item eventKey="1">
-                          <Accordion.Header className="width-15">
+                          <Accordion.Header>
                             Comment
                           </Accordion.Header>
                           <Accordion.Body>
@@ -165,12 +165,12 @@ const Discover = () => {
             </Masonry>
           </ResponsiveMasonry>
         </main>
-        <aside className="col-3">
-          <Card className="w-100 h-100  d-inline-block">
+        <aside className="col-3 ">
+          <Card className="w-100 h-100  d-inline-block lightergrey">
             <Card.Header className="p-4 m-0  border-bottom grey">
               <h2>Discover different ideas!</h2>
             </Card.Header>
-            <Card.Body>
+            <Card.Body className="">
               {/* search form  */}
               {/* <Form onSubmit={handleFormSubmit}>
                 <Form.Row>

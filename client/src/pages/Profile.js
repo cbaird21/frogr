@@ -56,7 +56,7 @@ const Profile = () => {
         <> 
         { Auth.loggedIn ? (
             <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
-                <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
+                <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
                     <div id="postContainer d-flex">
                         <h2>My Posts</h2>
                         <ResponsiveMasonry
@@ -66,7 +66,7 @@ const Profile = () => {
                             {
                                 userData.posts.map((post) => {
                                     return(
-                                        <Card key={post._id} className='m-3' style={{ width: '18rem' }}>
+                                        <Card key={post._id} className='m-3 lightergrey' style={{ width: '18rem' }}>
                                             <Card.Header className='lightergrey'>
                                                 {post.userPic ? (<Card.Img alt="profile pic"></Card.Img>) : ""}<h3>{post.postAuthor}</h3>
                                                 </Card.Header>
@@ -82,7 +82,7 @@ const Profile = () => {
                                                     >
                                                         Delete this post!
                                                     </Button>
-                                                    <small className="text-muted ms-auto"> {post.createdAt}</small>
+                                                    <small className="text-muted ms-auto d-block"> {post.createdAt}</small>
                                                 </Card.Body>
                                                 <Card.Footer>
                                                     <Accordion defaultActiveKey="null" flush>
@@ -122,7 +122,7 @@ const Profile = () => {
                                 </div>
                             </main>
                             <aside className="col-3">    
-                                <Card className="w-100 h-100  d-inline-block">
+                                <Card className="w-100 h-100  d-inline-block lightergrey">
                                     <Card.Header className="p-4 m-0  border-bottom grey">
                                         {userData.userPic ? (<Card.Img className="p-2" cldImg={userData.userPic}></Card.Img>) : ""}
                                         <h2 className="p-2 d-inline">{userData.username}</h2>

@@ -67,6 +67,7 @@ function App() {
     
     // making app window responsive
     const [width, setWindowWidth] = useState(0)
+    
     useEffect(() => { 
 
         updateDimensions();
@@ -78,7 +79,8 @@ function App() {
 
     const updateDimensions = () => {
         const width = window.innerWidth
-        setWindowWidth(width)
+        setWindowWidth(width);
+        
     }
 
     return (
