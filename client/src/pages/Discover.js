@@ -13,14 +13,13 @@ import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
 // import { UNLIKE_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import { savePostIds, getSavedPostIds, removePostId } from "../utils/localStorage";
+// import Auth from "../utils/auth";
+import { savePostIds, getSavedPostIds } from "../utils/localStorage";
 import { Button } from "react-bootstrap";
 
 const Discover = () => {
   const { loading, data } = useQuery(GET_POST);
   const posts = data?.posts || [];
-  const postId = posts._id;
 
   const [savedPostIds, setSavedPostIds] = useState(getSavedPostIds());
   const [savePost, { error }] = useMutation(LIKED_POST);
@@ -45,11 +44,13 @@ const Discover = () => {
   const handleRemoveComment = async (postId, commentId) => {
     try {
       const { data } = await removeComment({
-        variables: { postId: postId, commentId: commentId, commentAuthor: posts.comments.commentAuthor},
+        variables: { postId: postId, commentId: commentId},
       });
+      console.log(postId)
     } catch (err) {
       console.error(JSON.stringify(error));
     }
+    window.location.reload();
   };
 
   // const handleUnlike = async (postId) => {
@@ -72,7 +73,7 @@ const Discover = () => {
 
   return (
     <>
-      <Container fluid className="row vh-100 mb-2">
+      <Container fluid className="row vh-100 ms-auto mb-2">
         <main className="col-9 border h-100 d-inline-block rounded overflow-scroll">
           <h1>Hop around and find out</h1>
           <ResponsiveMasonry
@@ -139,10 +140,7 @@ const Discover = () => {
                             {post.comments.map((comment) => {
                               return (
                                 <>
-                                  <div
-                                    key={comment._id}
-                                    className="col-12 mb-3 pb-3"
-                                  >
+                                <div key={comment._id} className="col-12 mb-3 pb-3">
                                     <div className="p-3 bg-dark text-light">
                                       <h5 className="card-header">
                                         {comment.commentAuthor} commented{" "}
@@ -153,6 +151,7 @@ const Discover = () => {
                                       <p className="card-body">
                                         {comment.commentText}
                                       </p>
+                                      <button onClick={() => handleRemoveComment(post._id, comment._id)}>Delete comment</button>
                                     </div>
                                   </div>
                                 </>

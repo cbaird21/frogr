@@ -1,10 +1,11 @@
 import React from 'react'
-import { AdvancedImage } from '@cloudinary/react';
+// import { AdvancedImage } from '@cloudinary/react';
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 
 //import React/bootstrap
 import { Card, Container, Button } from 'react-bootstrap';
-
+import Accordion from "react-bootstrap/Accordion";
+import Commentform from "../components/CommentForm";
 //import PostForm
 import Postform from '../components/PostForm'
 import {useQuery, useMutation} from '@apollo/client'
@@ -84,6 +85,33 @@ const Profile = () => {
                                                     <small className="text-muted ms-auto"> {post.createdAt}</small>
                                                 </Card.Body>
                                                 <Card.Footer>
+                                                    <Accordion defaultActiveKey="null" flush>
+                                                    <Accordion.Item eventKey="1">
+                                                        <Accordion.Header className="width-15">
+                                                            Comment
+                                                        </Accordion.Header>
+                                                        <Accordion.Body>
+                                                            {post.comments.map((comment) => {
+                                                                return (
+                                                                <>
+                                                                    <div key={comment._id} className="col-12 mb-3 pb-3">
+                                                                    <div className="p-3 bg-dark text-light">
+                                                                        <h5 className="card-header">
+                                                                        {comment.commentAuthor} commented{" "}
+                                                                        <span style={{ fontSize: "0.825rem" }}>
+                                                                            on {comment.createdAt}
+                                                                        </span>
+                                                                        </h5>
+                                                                        <p className="card-body">{comment.commentText}</p>
+                                                                    </div>
+                                                                    </div>
+                                                                </>
+                                                                );
+                                                            })}
+                                                        <Commentform postId={post._id}/>
+                                                        </Accordion.Body>
+                                                        </Accordion.Item>
+                                                    </Accordion>  
                                                 </Card.Footer>
                                             </Card>
                                             )
