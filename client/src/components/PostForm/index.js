@@ -32,13 +32,13 @@ const PostForm = () => {
                 onSubmit={handleFormSubmit}
             >
                 <div className="col-12 col-lg-9">
-                    <input
+                    {/* <input
                         type="button"
                         placeholder="Add your image post here..."
                         value={postImage}
                         className="form-input w-100"
                         onChange={(event) => setImage(event.target.value)}
-                    />        
+                    />         */}
                     <Uploadwidget/>
                         
                     
@@ -54,8 +54,8 @@ const PostForm = () => {
                 </div>
 
                 <div className="col-12 col-lg-3">
-                    <button className="btn btn-info btn-block py-3" type="submit">
-                        Add Post
+                    <button className="btn btn-info mt-2" type="submit">
+                        Add a Text Post
                     </button>
                 </div>
                 {error && (
