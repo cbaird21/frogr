@@ -5,13 +5,13 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 //import React/bootstrap
 import { Card, Container, Button } from 'react-bootstrap';
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/commentForm/index";
+import Commentform from "../components/commentForm";
 //import PostForm
-import Postform from '../components/postForm'
-import { useQuery, useMutation } from '@apollo/client'
+import Postform from '../components/postForm';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_POST } from '../utils/mutations';
-import Auth from '../utils/auth'
+import Auth from '../utils/auth';
 import { removePostId } from "../utils/localStorage";
 
 const Profile = () => {

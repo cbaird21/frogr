@@ -4,10 +4,10 @@ import {
   Card,
   Button,
 } from "react-bootstrap";
-import Postform from '../components/postForm/index'
+import Postform from '../components/postForm'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/commentForm/index";
+import Commentform from "../components/commentForm";
 import { useState } from "react";
 // import Auth from "../utils/auth";
 import { removePostId } from "../utils/localStorage";

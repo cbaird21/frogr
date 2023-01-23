@@ -6,7 +6,7 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/commentForm/index";
+import Commentform from "../components/commentForm";
 import { REMOVE_COMMENT } from "../utils/mutations";
 
 import { useState, useEffect } from "react";
