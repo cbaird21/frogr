@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import { LIKED_POST } from "../utils/mutations";
 // import { UNLIKE_POST } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
-// import Auth from "../utils/auth";
+import Auth from "../utils/auth";
 import { savePostIds, getSavedPostIds } from "../utils/localStorage";
 import { Button } from "react-bootstrap";
 

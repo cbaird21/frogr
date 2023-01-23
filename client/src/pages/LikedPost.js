@@ -7,7 +7,7 @@ import {
 import Postform from '../components/PostForm'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/CommentForm";
+import Commentform from "../components/commentForm";
 import { useState } from "react";
 // import Auth from "../utils/auth";
 import { removePostId } from "../utils/localStorage";

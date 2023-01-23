@@ -5,7 +5,7 @@ import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 //import React/bootstrap
 import { Card, Container, Button } from 'react-bootstrap';
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/CommentForm";
+import Commentform from "../components/commentForm";
 //import PostForm
 import Postform from '../components/PostForm'
 import {useQuery, useMutation} from '@apollo/client'

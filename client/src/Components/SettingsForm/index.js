@@ -57,7 +57,7 @@ const EditUser = () => {
     return (
       <>
         <div className='container'>
-          <h3>Edit your username, email or password</h3>
+          <h3 classname="green">Profile Settings</h3>
           <Alert show={show} variant="success">
             <Alert.Heading>User details successfully changed!</Alert.Heading>
             <p>Good job.</p>
@@ -74,7 +74,7 @@ const EditUser = () => {
           >
             <div className="col-12 col-lg-9">
               <input
-                placeholder="Add your profile username..."
+                placeholder="Edit your profile username..."
                 value={userFormData.username}
                 className="form-input w-100"
                 name="username"
@@ -83,7 +83,7 @@ const EditUser = () => {
             </div>
             <div className="col-12 col-lg-9">
               <input
-                placeholder="Add your profile email..."
+                placeholder="Edit your profile email..."
                 value={userFormData.email}
                 name="email"
                 className="form-input w-100"
@@ -92,7 +92,7 @@ const EditUser = () => {
             </div>
             <div className="col-12 col-lg-9">
               <input
-                placeholder="Add your new password..."
+                placeholder="Edit your new password..."
                 value={userFormData.password}
                 name="password"
                 className="form-input w-100"
