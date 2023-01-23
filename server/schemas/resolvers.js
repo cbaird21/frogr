@@ -37,12 +37,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    editUser: async (parent, { username, password, userPic }, context) => {
+    editUser: async (parent, { username, email, password }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $set: { username: username, password: password, userPic: userPic },
+            $set: { username: username, email: email, password: password },
           },
           { new: true }
         );
