@@ -20,8 +20,8 @@ const Profile = () => {
     
     const handleRemovePost = async (postId) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-        console.log(token)
-        console.log(userData)
+        // console.log(token)
+        // console.log(userData)
 
         if (!token) {
             console.log("not logged in!!")
@@ -30,7 +30,9 @@ const Profile = () => {
 
             try {
             console.log("logged in, attempting to remove post ...")
-            const { data } = await removePost(postId);
+            const { data } = await removePost({
+                variables: {postId},
+            })
             console.log(data)
             removePostId(postId);
 
