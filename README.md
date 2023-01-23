@@ -1,71 +1,80 @@
 # frogr
 
-
 ## Technologies
 
+React, GQL, Node.js, and MongoDB
 
-## Table of Contents  
+## Table of Contents
+
 -[Project Description](#description)  
--[Installation](#installation)  
 -[User Story](#user-story)  
 -[Acceptance Criteria](#acceptance-criteria)  
--[Mock Up](#mock-up)  
--[Contributions](#contributions)       
--[License](#license)   
+-[Kanban](#kanban)  
+-[Deployed Application](#deployed-application)  
+-[Presentation](#presentation)  
+-[Contributions](#contributions)  
+-[Credits](#credits)  
+-[License](#license)
 
 ## Description
 
-Social Media Application to post thoughts, photos and comments.   
-
+Social Media Application to post thoughts, photos and comments.
 
 ## User Story
 
-As a user we want a microblogging site with an option to post blogs, comments and pictures. We want to be able to log in, log out, comment and have the ability to see things we've previously liked. We want this application to be downloadable and ability to cache photos.   
+As a user we want a microblogging site with an option to post blogs, comments and pictures. We want to be able to log in, log out, comment and have the ability to see things we've previously liked.
 
-## Acceptance Criteria  
+## Acceptance Criteria
 
-When I'm on the site    
-Then I will be given the option to download offline    
-When I'm in the downloaded version and logged in      
-Then I will be able to see my profile and liked content offine  
-
-When I go to the main page  
-Then I'm shown images and blogs on the site  
-When I try to like or comment  
-Then I'm presented with a log in or sign up page  
-When I'm able to log in    
-Then I'm presented with my profile  
-When I see something I like
-Then I'm given the option to like, comment or repost the image or blog  
+When I'm on the site  
+I'm presented with a discover page  
+However, I will be unable to like or comment until i'm logged in  
+If I haven't signed up before  
+I will be prompted to sign up  
+Once logged in  
+Then I'm presented with the discover page with functionality to like and comment on post  
+Then I'm given the option to like or comment
 When I like something  
-Then it will show how many likes are on that piece of content, it will also be saved in my liked content tab.
+Then it will show in my liked post section in my navbar
+When I click on my liked post section  
+Then I'm presented with my liked post with the option to delete them.  
+When I see the settings tab in my navbar and click  
+Then i'm presented with a page to update my username , email and password.  
+When I click on my profile in the navbar  
+Then I'm presented with my post with the option of deleting them
+When I click log out  
+Then I'm logged out and it takes me back to the discover page
 
-## Kanban & Wireframes
+## Kanban
 
-// under construction//
-  
-## Mock Up  
+![Alt text](client/public/images/kanban.png)
 
-// under construction//
+## Deployed Application
 
-## Walkthrough  
+![Alt text](client/public/images/Deployed%20page.png)
 
-// under construction //
+## Presentation
 
-## Contributions  
+https://docs.google.com/presentation/d/1Xdlqnw4qAgsccA42fqXjJPGpBPnZCDMssG7PVsKPTms/edit?usp=sharing
 
-Github Contributors  
+## Contributions
 
-https://github.com/jennnmarshall  
+Github Contributors
 
-https://github.com/GarrettA01  
+https://github.com/jennnmarshall
 
-https://github.com/mgetz34  
+https://github.com/GarrettA01
 
-https://github.com/AndyLaBorde  
+https://github.com/mgetz34
 
-https://github.com/cbaird21  
+https://github.com/AndyLaBorde
 
-## License  
+https://github.com/cbaird21
+
+## Credits
+
+Icons: https://icons8.com/icons
+
+## License
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
