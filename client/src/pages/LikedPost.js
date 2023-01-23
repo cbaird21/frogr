@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     Container,
     Card,
     Button,
 } from "react-bootstrap";
+import Postform from '../components/PostForm'
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Accordion from "react-bootstrap/Accordion";
+import Commentform from "../components/commentForm";
 import { useState, useEffect } from "react";
 import Auth from "../utils/auth";
 import { removePostId } from "../utils/localStorage";
@@ -63,21 +67,24 @@ const LikedPost = ()  => {
 
   return (
     <>
-      <Container>
-        <main>
-          <h1>Viewing liked posts!</h1>
+      <Container fluid className="row vh-100 ms-auto mb-2">
+        
+        <main className="col-9 border d-inline-block rounded overflow-scroll h-100">
           <h2>
             {userData.likedPost.length
-              ? `Viewing ${userData.likedPost.length} liked ${
+              ? `You have ${userData.likedPost.length} liked ${
                   userData.likedPost.length === 1 ? "post" : "posts"
                 }:`
               : "You have no liked posts!"}
           </h2>
-          <div className="grid">
+          <ResponsiveMasonry
+            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          >
+          <Masonry>
             {userData.likedPost.map((post) => {
               return (
-                <Card key={post._id} border="dark" style={{ width: "18rem" }}>
-                  <Card.Title>{post.postAuthor}</Card.Title>
+                <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
+                  <Card.Header className="lightergrey" ><h3>{post.postAuthor}</h3></Card.Header>
                   <Card.Body>
                     {/* if post image exists */}
                     {post.postImage ? (
@@ -94,36 +101,59 @@ const LikedPost = ()  => {
                     ) : null}
 
                     <Button
-                      className="btn-block btn-danger"
+                      className="btn-block btn-danger mt-2"
                       onClick={() => handleUnlike(post._id)}
                     >
                       Unlike this post!
                     </Button>
                   </Card.Body>
                   <Card.Footer>
-                    {post.comments.map((comment) => {
-                      return (
-                        <>
-                          <div key={comment._id} className="col-12 mb-3 pb-3">
-                            <div className="p-3 bg-dark text-light">
-                              <h5 className="card-header">
-                                {comment.commentAuthor} commented{" "}
-                                <span style={{ fontSize: "0.825rem" }}>
-                                  on {comment.createdAt}
-                                </span>
-                              </h5>
-                              <p className="card-body">{comment.commentText}</p>
+                    <Accordion defaultActiveKey="null" flush>
+                      <Accordion.Item eventKey="1">
+                        <Accordion.Header className="width-15">
+                            Comment
+                        </Accordion.Header>
+                          <Accordion.Body>
+                            {post.comments.map((comment) => {
+                        return (
+                          <>
+                            <div key={comment._id} className="col-12 mb-3 pb-3">
+                              <div className="p-3 bg-dark text-light">
+                                <h5 className="card-header">
+                                  {comment.commentAuthor} commented{" "}
+                                  <span style={{ fontSize: "0.825rem" }}>
+                                    on {comment.createdAt}
+                                  </span>
+                                </h5>
+                                <p className="card-body">{comment.commentText}</p>
+                              </div>
                             </div>
-                          </div>
-                        </>
-                      );
-                    })}
+                          </>
+                        );
+                      })}
+                          <Commentform postId={post._id}/>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>  
                   </Card.Footer>
                 </Card>
               );
             })}
-          </div>
+          </Masonry>
+          </ResponsiveMasonry>
         </main>
+        <aside className="col-3">    
+          <Card className="w-100 h-100  d-inline-block">
+            <Card.Header className="p-4 m-0  border-bottom grey">
+              {userData.userPic ? (<Card.Img className="p-2" cldImg={userData.userPic}></Card.Img>) : ""}
+              <h2 className="p-2 d-inline">{userData.username}</h2>
+              <p className="p-2">{`${userData.posts.length}`} Posts </p>
+              </Card.Header>
+              <Card.Body>
+                  <Postform/>
+              </Card.Body>
+            </Card>
+          </aside>
       </Container>
     </>
   );
