@@ -51,6 +51,8 @@ Then I'm logged out and it takes me back to the discover page
 
 ## Deployed Application
 
+https://frogr-app.herokuapp.com/
+
 ![Alt text](client/public/images/Deployed%20page.png)
 
 ## Presentation

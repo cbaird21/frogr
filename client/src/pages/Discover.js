@@ -77,7 +77,7 @@ const Discover = () => {
         <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
           <h1 className="green">Hop around and find out</h1>
           <ResponsiveMasonry
-            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
+            columnsCountBreakPoints={{ 470: 1, 838: 2, 1228: 3, 1610: 4 }}
           >
             <Masonry>
               {posts.map((post) => {
