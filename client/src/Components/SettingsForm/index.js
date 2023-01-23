@@ -5,8 +5,8 @@ import { useMutation } from '@apollo/client';
 import { EDIT_USER } from '../../utils/mutations';
 
 const EditUser = () => {
-    const [inputType, setInputType] = useState < string > ("")
-    const inputTypes = ["text", "radio", "checkbox", "hidden", "password"]
+    // const [inputType, setInputType] = useState < string > ("")
+    // const inputTypes = ["text", "radio", "checkbox", "hidden", "password"]
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
