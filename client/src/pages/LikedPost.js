@@ -7,7 +7,7 @@ import {
 import Postform from '../components/PostForm'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/CommentForm";
+import Commentform from "../components/commentForm";
 import { useState } from "react";
 // import Auth from "../utils/auth";
 import { removePostId } from "../utils/localStorage";
@@ -69,7 +69,7 @@ const LikedPost = ()  => {
     <>
       <Container fluid className="row vh-100 ms-auto mb-2">
         
-        <main className="col-9 border d-inline-block rounded overflow-scroll h-100">
+        <main className="customScrollBar grey col-9 border d-inline-block rounded overflow-scroll h-100">
           <h2>
             {userData.likedPost.length
               ? `You have ${userData.likedPost.length} liked ${
@@ -83,7 +83,7 @@ const LikedPost = ()  => {
           <Masonry>
             {userData.likedPost.map((post) => {
               return (
-                <Card key={post._id} className="m-3" style={{ width: "18rem" }}>
+                <Card key={post._id} className="m-3 lightergrey" style={{ width: "18rem" }}>
                   <Card.Header className="lightergrey" ><h3>{post.postAuthor}</h3></Card.Header>
                   <Card.Body>
                     {/* if post image exists */}
@@ -106,6 +106,9 @@ const LikedPost = ()  => {
                     >
                       Unlike this post!
                     </Button>
+                    <small className="d-block text-muted ml-2">
+                        created at: {post.createdAt}
+                    </small>
                   </Card.Body>
                   <Card.Footer>
                     <Accordion defaultActiveKey="null" flush>
@@ -143,7 +146,7 @@ const LikedPost = ()  => {
           </ResponsiveMasonry>
         </main>
         <aside className="col-3">    
-          <Card className="w-100 h-100  d-inline-block">
+          <Card className="w-100 h-100  d-inline-block lightergrey">
             <Card.Header className="p-4 m-0  border-bottom grey">
               {userData.userPic ? (<Card.Img className="p-2" cldImg={userData.userPic}></Card.Img>) : ""}
               <h2 className="p-2 d-inline">{userData.username}</h2>

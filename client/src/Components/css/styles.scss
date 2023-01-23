@@ -6,10 +6,20 @@ $lime-green: #B5F44A;
 $light-blue: #EFF9FA;
 $soft-green: #61772C;
 
+
+#root {
+    background-color: $dark-grey;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
 nav {
     background-image: url('../images/frognav.png');
     background-size: cover;
 }
+
 
 footer {
     margin-top: 10vh;
@@ -34,4 +44,8 @@ footer {
 
 .white {
     color: white;
+}
+
+.customScrollBar::-webkit-scrollbar {
+    display: none;
 }
