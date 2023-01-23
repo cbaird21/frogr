@@ -45,11 +45,13 @@ const Discover = () => {
   const handleRemoveComment = async (postId, commentId) => {
     try {
       const { data } = await removeComment({
-        variables: { postId: postId, commentId: commentId, commentAuthor: posts.comments.commentAuthor},
+        variables: { postId: postId, commentId: commentId},
       });
+      console.log(postId)
     } catch (err) {
       console.error(JSON.stringify(error));
     }
+    window.location.reload();
   };
 
   // const handleUnlike = async (postId) => {
@@ -149,6 +151,7 @@ const Discover = () => {
                                       <p className="card-body">
                                         {comment.commentText}
                                       </p>
+                                      <button onClick={() => handleRemoveComment(post._id, comment._id)}>Delete comment</button>
                                     </div>
                                   </div>
                                 </>
