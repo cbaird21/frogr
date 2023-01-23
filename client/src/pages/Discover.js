@@ -75,7 +75,7 @@ const Discover = () => {
     <>
       <Container fluid className=" row vh-100 ms-auto mb-2">
         <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
-          <h1>Hop around and find out</h1>
+          <h1 className="green">Hop around and find out</h1>
           <ResponsiveMasonry
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           >

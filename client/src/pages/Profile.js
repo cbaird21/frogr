@@ -7,7 +7,7 @@ import { Card, Container, Button } from 'react-bootstrap';
 import Accordion from "react-bootstrap/Accordion";
 import Commentform from "../components/commentForm";
 //import PostForm
-import Postform from '../components/PostForm'
+import Postform from '../components/postForm'
 import {useQuery, useMutation} from '@apollo/client'
 import { GET_ME } from '../utils/queries';
 import { REMOVE_POST } from '../utils/mutations';
@@ -58,7 +58,7 @@ const Profile = () => {
             <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
                 <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
                     <div id="postContainer d-flex">
-                        <h2>My Posts</h2>
+                        <h2 className='green'>My Posts</h2>
                         <ResponsiveMasonry
                             columnsCountBreakPoints={{350: 1, 750: 2, 900: 3}}
                         >

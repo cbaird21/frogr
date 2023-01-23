@@ -4,7 +4,7 @@ import {
     Card,
     Button,
 } from "react-bootstrap";
-import Postform from '../components/PostForm'
+import Postform from '../components/postForm'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Accordion from "react-bootstrap/Accordion";
 import Commentform from "../components/commentForm";
