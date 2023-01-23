@@ -7,9 +7,9 @@ import {
 import Postform from '../components/PostForm'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Accordion from "react-bootstrap/Accordion";
-import Commentform from "../components/commentForm";
-import { useState, useEffect } from "react";
-import Auth from "../utils/auth";
+import Commentform from "../components/CommentForm";
+import { useState } from "react";
+// import Auth from "../utils/auth";
 import { removePostId } from "../utils/localStorage";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";

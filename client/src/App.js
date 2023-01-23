@@ -9,6 +9,7 @@ import Profile from './pages/Profile';
 import LikedPost from './pages/LikedPost';
 import Footer from './components/footer/index';
 import Header from './components/header/index';
+import Settings from './pages/Settings'
 // import UploadWidget from './components/UploadWidget';
 
 // import { Component } from 'react';
@@ -64,17 +65,16 @@ const client = new ApolloClient({
 });
 
 function App() {
-    
+
     // making app window responsive
     const [width, setWindowWidth] = useState(0)
-    
-    useEffect(() => { 
+    useEffect(() => {
 
         updateDimensions();
 
         window.addEventListener('resize', updateDimensions);
-        return () => 
-        window.removeEventListener('resize',updateDimensions);
+        return () =>
+            window.removeEventListener('resize', updateDimensions);
     }, [])
 
     const updateDimensions = () => {
@@ -87,11 +87,12 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <>
-                <Header />
+                    <Header />
                     <Routes>
                         <Route exact path='/' element={<Discover />} />
                         <Route exact path='/saved' element={<LikedPost />} />
                         <Route exact path="/profile" element={< Profile />} />
+                        <Route exact path="/settings" element={< Settings />} />
                         <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
                     </Routes>
                     <Footer />
