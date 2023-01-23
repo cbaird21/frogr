@@ -49,3 +49,12 @@ footer {
 .customScrollBar::-webkit-scrollbar {
     display: none;
 }
+
+.green {
+    color: $lime-green;
+}
+
+.greengrey {
+    background-color: $lime-green;
+    color: $dark-grey;
+}

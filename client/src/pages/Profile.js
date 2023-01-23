@@ -58,7 +58,7 @@ const Profile = () => {
                 <Container fluid className="row vh-100 justify-content-start ms-auto mb-2">
                     <main className="customScrollBar col-9 border h-100 d-inline-block rounded overflow-scroll">
                         <div id="postContainer d-flex">
-                            <h2>My Posts</h2>
+                            <h2 className='green'>My Posts</h2>
                             <ResponsiveMasonry
                                 columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
                             >
@@ -67,7 +67,7 @@ const Profile = () => {
                                         userData.posts.map((post) => {
                                             return (
                                                 <Card key={post._id} className='m-3 lightergrey' style={{ width: '18rem' }}>
-                                                    <Card.Header className='lightergrey'>
+                                                    <Card.Header className='greengrey'>
                                                         {post.userPic ? (<Card.Img alt="profile pic"></Card.Img>) : ""}<h3>{post.postAuthor}</h3>
                                                     </Card.Header>
                                                     <Card.Body>

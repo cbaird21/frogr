@@ -54,7 +54,7 @@ const PostForm = () => {
                 </div>
 
                 <div className="col-12 col-lg-3">
-                    <button className="btn btn-info mt-2" type="submit">
+                    <button className="btn btn-outline-success mt-2" type="submit">
                         Add a Text Post
                     </button>
                 </div>
