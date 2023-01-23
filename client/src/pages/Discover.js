@@ -6,7 +6,7 @@ import { Container, Card } from "react-bootstrap";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import { useQuery } from "@apollo/client";
 import { GET_POST } from "../utils/queries";
-import Commentform from "../components/CommentForm";
+import Commentform from "../components/commentForm";
 import { REMOVE_COMMENT } from "../utils/mutations";
 
 import { useState, useEffect } from "react";
@@ -107,7 +107,9 @@ const Discover = () => {
 
                       {/* like post button */}
                       {/* should only view when logged in! */}
-                      <Button
+                      {
+                        Auth.loggedIn() ? (
+                          <Button
                         disabled={savedPostIds?.some(
                           (savedPostId) => savedPostId === post._id
                         )}
@@ -120,6 +122,8 @@ const Discover = () => {
                           ? "Liked!"
                           : "Like Post"}
                       </Button>
+                        ) : null}
+                      
 
                       <small className="text-muted ml-2">
                         created at: {post.createdAt}
